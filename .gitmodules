@@ -1,0 +1,3 @@
+[submodule "components/data_driver"]
+	path = components/data_driver
+	url = https://github.com/opensk-dev/data_driver.git
