@@ -1,0 +1,12 @@
+{
+  "name" : "opensk",
+  "version-string" : "1.0.0",
+  "builtin-baseline" : "79a6c094989d1952da01a7bc3abf30198f8da860",
+  "dependencies" : [ {
+    "name" : "boost-program-options",
+    "version>=" : "1.82.0#2"
+  }, {
+    "name" : "boost-test",
+    "version>=" : "1.82.0#2"
+  } ]
+}
