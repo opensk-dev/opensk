@@ -16,7 +16,7 @@ struct ConfigureOptions {
     std::filesystem::path saves_path;
 };
 
-std::optional<ConfigureOptions> read_options(int argc, const char* argv[]) {
+std::optional<ConfigureOptions> read_options(int argc, const char* argv[]) noexcept {
     namespace po = boost::program_options;
     using std::filesystem::path;
 
@@ -39,7 +39,7 @@ std::optional<ConfigureOptions> read_options(int argc, const char* argv[]) {
     auto allowed_options_desc = po::options_description("Allowed options");
     allowed_options_desc.add(command_line_options_desc).add(configure_options_desc);
 
-    {   // parse command line
+    {   // handle command line
         po::variables_map command_line_variables{};
 
         try {
@@ -48,10 +48,10 @@ std::optional<ConfigureOptions> read_options(int argc, const char* argv[]) {
             po::notify(command_line_variables);
         } catch (const po::error_with_option_name& ex) {
             std::cout << "unrecognised command line option " << ex.get_option_name() << '\n';
-            std::exit(1);
+            return {};
         } catch (const std::exception& ex) {
             std::cout << ex.what() << '\n';
-            std::exit(2);
+            return {};
         }
 
         if (command_line_variables.count("help")) {
@@ -68,11 +68,11 @@ std::optional<ConfigureOptions> read_options(int argc, const char* argv[]) {
 
     ConfigureOptions configure_options{};
 
-    {   // parse config file
+    {   // handle config file
         auto config_file = std::ifstream(config_file_path);
         if (!config_file) {
             std::cout << "couldn't open config file\n";
-            std::exit(1);
+            return {};
         }
 
         po::variables_map configure_variables{};
@@ -83,10 +83,10 @@ std::optional<ConfigureOptions> read_options(int argc, const char* argv[]) {
             po::notify(configure_variables);
         } catch (const po::error_with_option_name& ex) {
             std::cout << "unrecognised configure option " << ex.get_option_name() << '\n';
-            std::exit(1);
+            return {};
         } catch (const std::exception& ex) {
             std::cout << ex.what() << '\n';
-            std::exit(2);
+            return {};
         }
 
         auto try_get_option =
@@ -95,13 +95,17 @@ std::optional<ConfigureOptions> read_options(int argc, const char* argv[]) {
                     option_place = std::move(configure_variables.at(option_name).as<decltype(option_place)>());
                 } catch (const std::out_of_range& ex) {
                     std::cout << "config parameter \"" << option_name << "\" not set\n";
-                    std::exit(1);
+                    throw ex; // our work done. finish program;
                 }
             };
 
-        try_get_option(configure_options.data_path, "data-path");
-        try_get_option(configure_options.settings_path, "settings-path");
-        try_get_option(configure_options.saves_path, "saves-path");
+        try {
+            try_get_option(configure_options.data_path, "data-path");
+            try_get_option(configure_options.settings_path, "settings-path");
+            try_get_option(configure_options.saves_path, "saves-path");
+        } catch (const std::exception& ex) {
+            return {};
+        }
     }
 
     return configure_options;
