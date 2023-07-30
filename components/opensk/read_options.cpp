@@ -1,22 +1,13 @@
-# ifndef SK_READ_OPTIONS_HPP_
-# define SK_READ_OPTIONS_HPP_
+# include <read_options.hpp>
+# include <version.hpp>
 
 # include <boost/program_options.hpp>
 
+# include <format>
 # include <iostream>
-# include <optional>
 # include <fstream>
-# include <filesystem>
 
-namespace sk {
-
-struct ConfigureOptions {
-    std::filesystem::path data_path;
-    std::filesystem::path settings_path;
-    std::filesystem::path saves_path;
-};
-
-std::optional<ConfigureOptions> read_options(int argc, const char* argv[]) noexcept {
+std::optional<sk::ConfigureOptions> sk::read_options(int argc, const char* argv[]) noexcept {
     namespace po = boost::program_options;
     using std::filesystem::path;
 
@@ -60,13 +51,12 @@ std::optional<ConfigureOptions> read_options(int argc, const char* argv[]) noexc
         }
 
         if (command_line_variables.count("version")) {
-            // TODO: configure version with cmake
-            std::cout << "opensk version 0.0" << '\n';
+            std::cout << std::format("opensk version {}\n", sk::version_string());
             return {};
         }
     }
 
-    ConfigureOptions configure_options{};
+    sk::ConfigureOptions configure_options{};
 
     {   // handle config file
         auto config_file = std::ifstream(config_file_path);
@@ -110,7 +100,3 @@ std::optional<ConfigureOptions> read_options(int argc, const char* argv[]) noexc
 
     return configure_options;
 }
-
-}
-
-# endif // SK_READ_OPTIONS_HPP_

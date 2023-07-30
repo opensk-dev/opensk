@@ -1,4 +1,5 @@
 # include <read_options.hpp>
+# include <version.hpp>
 
 # define BOOST_TEST_MAIN
 # include <boost/test/unit_test.hpp>
@@ -64,8 +65,7 @@ BOOST_AUTO_TEST_CASE(check_option_version) {
     BOOST_REQUIRE(options.has_value() == false);
 
     BOOST_CHECK(output.contains("opensk"));
-    // TODO: configure version with cmake
-    BOOST_CHECK(output.contains("version 0.0"));
+    BOOST_CHECK(output.contains(sk::version_string()));
 }
 
 // TODO: check invalid cases
