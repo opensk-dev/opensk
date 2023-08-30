@@ -2,7 +2,7 @@
 /[Oo]ut/
 /[Bb]in/
 
-/cmake-*/
+/.idea/
+/cmake-build-*/
 /.vs/
 /.vscode/
-/.idea/

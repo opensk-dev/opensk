@@ -1,15 +1,20 @@
-# include <read_options.hpp>
-# include <version.hpp>
+# include <options.hpp>
+# include <config.hpp>
 
 # include <boost/program_options.hpp>
 
-# include <format>
+# include <spdlog/spdlog.h>
+# include <tracy/Tracy.hpp>
+
 # include <iostream>
 # include <fstream>
+# include <format>
 
 std::optional<sk::ConfigureOptions> sk::read_options(int argc, const char* argv[]) noexcept {
     namespace po = boost::program_options;
     using std::filesystem::path;
+
+    ZoneScopedNC("read options", tracy::Color::Blue);
 
     path config_file_path{};
     auto* config_option_val = po::value<path>(&config_file_path)->default_value("opensk.conf");
@@ -38,10 +43,10 @@ std::optional<sk::ConfigureOptions> sk::read_options(int argc, const char* argv[
             po::store(command_line_parsed_options, command_line_variables);
             po::notify(command_line_variables);
         } catch (const po::error_with_option_name& ex) {
-            std::cout << "unrecognised command line option " << ex.get_option_name() << '\n';
+            std::cout << std::format("unrecognised command line option {}\n", ex.get_option_name());
             return {};
         } catch (const std::exception& ex) {
-            std::cout << ex.what() << '\n';
+            spdlog::error("parse command line exception: {}", ex.what());
             return {};
         }
 
@@ -51,7 +56,7 @@ std::optional<sk::ConfigureOptions> sk::read_options(int argc, const char* argv[
         }
 
         if (command_line_variables.count("version")) {
-            std::cout << std::format("opensk version {}\n", sk::version_string());
+            std::cout << std::format("opensk version {}\n", sk::config::version_string());
             return {};
         }
     }
@@ -61,7 +66,7 @@ std::optional<sk::ConfigureOptions> sk::read_options(int argc, const char* argv[
     {   // handle config file
         auto config_file = std::ifstream(config_file_path);
         if (!config_file) {
-            std::cout << "couldn't open config file\n";
+            spdlog::error("couldn't open config file");
             return {};
         }
 
@@ -72,10 +77,10 @@ std::optional<sk::ConfigureOptions> sk::read_options(int argc, const char* argv[
             po::store(configure_parsed_options, configure_variables);
             po::notify(configure_variables);
         } catch (const po::error_with_option_name& ex) {
-            std::cout << "unrecognised configure option " << ex.get_option_name() << '\n';
+            std::cout << std::format("unrecognised configure option {}\n", ex.get_option_name());
             return {};
         } catch (const std::exception& ex) {
-            std::cout << ex.what() << '\n';
+            spdlog::error("parse config file exception: {}", ex.what());
             return {};
         }
 
@@ -84,7 +89,7 @@ std::optional<sk::ConfigureOptions> sk::read_options(int argc, const char* argv[
                 try {
                     option_place = std::move(configure_variables.at(option_name).as<decltype(option_place)>());
                 } catch (const std::out_of_range& ex) {
-                    std::cout << "config parameter \"" << option_name << "\" not set\n";
+                    std::cout << std::format("config parameter '{}' not set\n", option_name);
                     throw ex; // our work done. finish program;
                 }
             };

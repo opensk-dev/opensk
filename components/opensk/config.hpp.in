@@ -1,6 +1,0 @@
-# ifndef SK_CONFIG_HPP_
-# define SK_CONFIG_HPP_
-
-# define SK_VERSION_STRING "${PROJECT_VERSION}"
-
-# endif // SK_CONFIG_HPP_
