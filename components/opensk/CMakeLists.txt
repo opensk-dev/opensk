@@ -120,7 +120,7 @@ endif()
 
 add_custom_target(
     sk_copy_resources
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${sk_resources_dir} ${sk_output_dir}
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${sk_resources_dir} $<TARGET_FILE_DIR:opensk>
     COMMENT "copying resources"
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
