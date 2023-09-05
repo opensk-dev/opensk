@@ -6,3 +6,6 @@
 /cmake-build-*/
 /.vs/
 /.vscode/
+
+ctest_output.log
+CMakeUserPresets.json

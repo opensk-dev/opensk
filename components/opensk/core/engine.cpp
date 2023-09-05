@@ -1,5 +1,5 @@
-# include <core/engine.hpp>
 # include <core/create.hpp>
+# include <core/engine.hpp>
 # include <core/exceptions.hpp>
 
 # include <options.hpp>
@@ -24,10 +24,10 @@ void Engine::run() {
     main_menu_frame_.initialize();
     current_frame_ = &main_menu_frame_;
     runtime_->get_main_arena().capture();
-    spdlog::info("finish run");
 }
 
 Engine::~Engine() {
+    current_frame_.get()->on_disable();
     main_menu_frame_.finalize();
 }
 
@@ -39,4 +39,4 @@ Runtime& Engine::get_runtime() {
     return runtime_.value();
 }
 
-} // sk
+}// namespace sk

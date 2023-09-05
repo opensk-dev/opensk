@@ -50,6 +50,9 @@ void Frame::on_enable() {
 }
 
 void Frame::on_disable() {
+    if (!is_initialized_) {
+        return;
+    }
     if (!is_enabled_) {
         sk::throw_pedantic(sk::exceptions::FrameBadAccess("Couldn't disable - not enabled"));
         return;

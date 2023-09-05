@@ -30,23 +30,25 @@ public:
     void start();
     void stop();
     void capture();
+    void stop_in_future();
 
 private:
     void working_loop();
 
-    struct ControlBlock {
-        explicit ControlBlock(const std::function<void()>& working_loop);
-        explicit ControlBlock(const Managed&) {};
+    struct Control {
+        explicit Control(const std::function<void()>& working_loop);
+        explicit Control(const Managed&) {};
 
         bool on_fire() const;
 
         std::mutex mtx{};
         std::atomic_bool is_working = false;
+        std::atomic_bool is_should_exit = false;
         std::optional<std::thread> working_thread{};
         tbb::concurrent_bounded_queue<Task*> tasks_queue{};
     };
 
-    std::unique_ptr<ControlBlock> control_block_ptr_{};
+    std::unique_ptr<Control> control_ptr_{};
 };
 
 } // sk

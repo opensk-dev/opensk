@@ -7,11 +7,6 @@
 # include <spdlog/spdlog.h>
 # include <tracy/Tracy.hpp>
 
-# include <core/runtime_arena.hpp>
-# include <frames/main_menu/hello_task.hpp>
-
-# include <thread>
-
 void enable_debug_logging() {
     using sk::config::BuildOptionsEnum;
     if (sk::config::is_enabled<BuildOptionsEnum::debug_output>()) {

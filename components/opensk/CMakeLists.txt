@@ -52,77 +52,86 @@ set(
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${sk_sources})
 list(APPEND sk_sources ${sk_gen_headers})
 
-add_executable(opensk "main.cpp" ${sk_sources})
-target_compile_features(opensk PUBLIC cxx_std_23)
-
-set_target_properties(
-    opensk PROPERTIES
-    VERSION ${PROJECT_VERSION}
-    SOVERSION ${PROJECT_VERSION_MAJOR}
-)
+target_sources(opensk_lib PUBLIC ${sk_sources})
+target_compile_features(opensk_lib PUBLIC cxx_std_23)
 
 include(GNUInstallDirs)
 
 target_include_directories(
-    opensk PUBLIC
+    opensk_lib PUBLIC
     "$<BUILD_INTERFACE:${sk_source_dir}>"
     "$<BUILD_INTERFACE:${sk_gen_include_dir}>"
     "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
 )
 
-target_link_libraries(opensk opensk::data)
+target_link_libraries(opensk_lib PUBLIC opensk::data)
 
 find_package(Boost 1.82 REQUIRED COMPONENTS program_options)
-target_link_libraries(opensk ${Boost_LIBRARIES})
+target_link_libraries(opensk_lib PUBLIC ${Boost_LIBRARIES})
+target_include_directories(opensk_lib PUBLIC "$<BUILD_INTERFACE:${Boost_INCLUDE_DIRS}>")
 
 find_package(TBB REQUIRED)
-target_link_libraries(opensk TBB::tbb)
+target_link_libraries(opensk_lib PUBLIC TBB::tbb)
 
 find_package(unofficial-omniverse-physx-sdk REQUIRED)
-target_link_libraries(opensk unofficial::omniverse-physx-sdk::sdk)
-
-if(sk_physics_debug)
-    target_compile_definitions(
-        opensk
-        PRIVATE SK_ENABLE_PHYSICS_DEBUG
-        PRIVATE SK_ENABLE_PHYSX_PVD_CLIENT
-    )
-endif()
+target_link_libraries(opensk_lib PUBLIC unofficial::omniverse-physx-sdk::sdk)
 
 find_package(spdlog 1.12 REQUIRED)
-target_link_libraries(opensk spdlog::spdlog)
-
-if(sk_debug_output)
-    target_compile_definitions(
-        opensk
-        PRIVATE SK_ENABLE_DEBUG_OUTPUT
-    )
-endif()
+target_link_libraries(opensk_lib PUBLIC spdlog::spdlog)
 
 if(sk_profiling)
     find_package(Tracy REQUIRED)
-    target_link_libraries(opensk Tracy::TracyClient)
+    target_link_libraries(opensk_lib PUBLIC Tracy::TracyClient)
     target_compile_definitions(
-        opensk
-        PRIVATE SK_ENABLE_PROFILING
-        PRIVATE TRACY_ENABLE
+        opensk_lib
+        PUBLIC TRACY_ENABLE
+        PUBLIC SK_ENABLE_PROFILING
     )
 else()
-    target_link_libraries(opensk dummy_Tracy)
+    target_link_libraries(opensk_lib PUBLIC dummy_Tracy)
+endif()
+
+if(sk_physics_debug)
+    target_compile_definitions(
+        opensk_lib
+        PUBLIC SK_ENABLE_PHYSICS_DEBUG
+        PUBLIC SK_ENABLE_PHYSX_PVD_CLIENT
+    )
+endif()
+
+if(sk_debug_output)
+    target_compile_definitions(
+        opensk_lib
+        PUBLIC SK_ENABLE_DEBUG_OUTPUT
+    )
 endif()
 
 if(sk_pedantic_exceptions)
     target_compile_definitions(
-        opensk
-        PRIVATE SK_ENABLE_PEDANTIC_EXCEPTIONS
+        opensk_lib
+        PUBLIC SK_ENABLE_PEDANTIC_EXCEPTIONS
     )
 endif()
 
-add_custom_target(
-    sk_copy_resources
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${sk_resources_dir} $<TARGET_FILE_DIR:opensk>
-    COMMENT "copying resources"
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-)
+if(sk_build_opensk)
+    add_executable(opensk "${sk_source_dir}/main.cpp")
+    target_link_libraries(opensk opensk_lib)
 
-add_dependencies(opensk sk_copy_resources)
+    set_target_properties(
+        opensk PROPERTIES
+        VERSION ${PROJECT_VERSION}
+        SOVERSION ${PROJECT_VERSION_MAJOR}
+        ARCHIVE_OUTPUT_DIRECTORY "${sk_output_dir}/lib"
+        LIBRARY_OUTPUT_DIRECTORY "${sk_output_dir}"
+        RUNTIME_OUTPUT_DIRECTORY "${sk_output_dir}"
+    )
+
+    add_custom_target(
+        sk_copy_resources
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${sk_resources_dir} $<TARGET_FILE_DIR:opensk>
+        COMMENT "copying resources"
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    )
+
+    add_dependencies(opensk sk_copy_resources)
+endif()

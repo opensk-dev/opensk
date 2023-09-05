@@ -24,7 +24,7 @@ void Runtime::push_task(Runtime::ArenasEnum arena, Task* task) {
 }
 
 void Runtime::abort() {
-    main_arena_.stop();
+    main_arena_.stop_in_future();
 }
 
 RuntimeArena& Runtime::get_main_arena() {

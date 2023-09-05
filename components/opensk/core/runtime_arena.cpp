@@ -1,28 +1,27 @@
 # include <core/runtime_arena.hpp>
-# include <core/exceptions.hpp>
 
-# include <tracy/Tracy.hpp>
 # include <spdlog/spdlog.h>
+# include <tracy/Tracy.hpp>
 
 namespace sk {
 
-RuntimeArena::ControlBlock::ControlBlock(const std::function<void()>& working_loop)
+RuntimeArena::Control::Control(const std::function<void()>& working_loop)
     : is_working(true),
       working_thread(working_loop) {}
 
-bool RuntimeArena::ControlBlock::on_fire() const {
-    return !tasks_queue.empty() || is_working.load();
+bool RuntimeArena::Control::on_fire() const {
+    return !tasks_queue.empty() || (is_working.load() && !is_should_exit.load());
 }
 
 RuntimeArena::RuntimeArena() {
     auto delegate = [this]() {
         working_loop();
     };
-    control_block_ptr_ = std::make_unique<ControlBlock>(delegate);
+    control_ptr_ = std::make_unique<Control>(delegate);
 }
 
 RuntimeArena::RuntimeArena(const RuntimeArena::Managed& managed) {
-    control_block_ptr_ = std::make_unique<ControlBlock>(managed);
+    control_ptr_ = std::make_unique<Control>(managed);
 }
 
 sk::RuntimeArena::~RuntimeArena() {
@@ -33,51 +32,65 @@ void sk::RuntimeArena::push_task(Task* const task) {
     if (task == nullptr) {
         return;
     }
-    control_block_ptr_->tasks_queue.push(task);
+    control_ptr_->tasks_queue.push(task);
 }
 
 void sk::RuntimeArena::working_loop() {
     ZoneScopedNC("Runtime arena working loop", tracy::Color::Aqua);
+    auto& control = *control_ptr_;
     Task* task = nullptr;
-    auto& tasks_queue = control_block_ptr_->tasks_queue;
-    while (control_block_ptr_->on_fire()) {
-        tasks_queue.pop(task);
+    while (control.on_fire()) {
+        control.tasks_queue.pop(task);
         if (task != nullptr) {
             task->execute();
         }
     }
+    control.is_should_exit = false;
+    control.is_working = false;
 }
 
 void RuntimeArena::start() {
-    if (control_block_ptr_->is_working.load()) {
+    auto& control = *control_ptr_;
+    if (control.is_working.load()) {
         return;
     }
-    std::lock_guard lock(control_block_ptr_->mtx);
-    control_block_ptr_->is_working.store(true);
-    control_block_ptr_->working_thread.emplace(
+    std::lock_guard lock(control.mtx);
+    control.is_working = true;
+    control.working_thread.emplace(
         [this]() {
             working_loop();
         });
 }
 
 void RuntimeArena::stop() {
-    if (control_block_ptr_->is_working.load()) {
-        std::unique_lock lock(control_block_ptr_->mtx);
-        control_block_ptr_->is_working.store(false);
-        control_block_ptr_->tasks_queue.push(nullptr);
-        if (control_block_ptr_->working_thread.has_value()) {
+    auto& control = *control_ptr_;
+    if (control.is_working.load()) {
+        std::unique_lock lock(control.mtx);
+        control.is_working = false;
+        control.tasks_queue.push(nullptr);
+        if (control.working_thread.has_value()) {
             lock.unlock();
-            control_block_ptr_->working_thread->join();
+            control.working_thread->join();
         }
     }
 }
 
 void RuntimeArena::capture() {
-    if (control_block_ptr_->is_working.load()) {
+    auto& control = *control_ptr_;
+    if (control.is_working.load()) {
         return;
     };
-    control_block_ptr_->is_working.store(true);
+    control.is_working = true;
     working_loop();
 }
 
-} // sk
+void RuntimeArena::stop_in_future() {
+    auto& control = *control_ptr_;
+    if (control.is_working.load()) {
+        stop();
+    } else {
+        control.is_should_exit = true;
+    }
+}
+
+}// namespace sk

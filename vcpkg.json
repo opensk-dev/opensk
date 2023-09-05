@@ -9,6 +9,9 @@
     "name" : "boost-property-tree",
     "version>=" : "1.82.0#2"
   }, {
+    "name": "boost-test",
+    "version>=" : "1.82.0#2"
+  },{
     "name" : "tbb",
     "version>=" : "2021.9.0#2"
   }, {
