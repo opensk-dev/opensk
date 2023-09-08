@@ -43,6 +43,8 @@ set(
     "${sk_source_dir}/phys/pvd_client.hpp"
     "${sk_source_dir}/phys/pvd_client.cpp"
 
+    "${sk_source_dir}/math/rect.hpp"
+
     "${sk_source_dir}/frames/main_menu/frame.hpp"
     "${sk_source_dir}/frames/main_menu/frame.cpp"
     "${sk_source_dir}/frames/main_menu/hello_task.hpp"
@@ -114,7 +116,8 @@ if(sk_pedantic_exceptions)
 endif()
 
 if(sk_build_opensk)
-    add_executable(opensk "${sk_source_dir}/main.cpp")
+    add_executable(opensk "${sk_source_dir}/main.cpp"
+        math/point.hpp)
     target_link_libraries(opensk opensk_lib)
 
     set_target_properties(
