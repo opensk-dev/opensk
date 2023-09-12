@@ -225,7 +225,7 @@ private:
      */
 public:
     template<class... Args>
-    RectImpl(Args&& ... args)
+    explicit RectImpl(Args&& ... args)
         : representation_(std::forward<Args>(args)...) {}
 
 public:
@@ -427,7 +427,7 @@ private:
     using traits = detail::RectTraits<std::int32_t, std::int32_t>;
 public:
     Rect(traits::point_type point, traits::size_type size)
-        : Base(std::move(point), std::move(size)) {}
+        : Base(std::move(point), size) {}
 };
 
 } // sk::math

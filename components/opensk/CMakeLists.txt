@@ -30,6 +30,14 @@ set(
     "${sk_source_dir}/core/runtime_arena.hpp"
     "${sk_source_dir}/core/runtime_arena.cpp"
 
+    "${sk_source_dir}/math/concepts/point.hpp"
+    "${sk_source_dir}/math/concepts/rect.hpp"
+
+    "${sk_source_dir}/math/point.hpp"
+    "${sk_source_dir}/math/rect.hpp"
+    "${sk_source_dir}/math/r_tree.hpp"
+    "${sk_source_dir}/math/r_tree.cpp"
+
     "${sk_source_dir}/phys/exceptions.hpp"
     "${sk_source_dir}/phys/exceptions.cpp"
     "${sk_source_dir}/phys/manager.hpp"
@@ -42,8 +50,6 @@ set(
     "${sk_source_dir}/phys/error_callback.cpp"
     "${sk_source_dir}/phys/pvd_client.hpp"
     "${sk_source_dir}/phys/pvd_client.cpp"
-
-    "${sk_source_dir}/math/rect.hpp"
 
     "${sk_source_dir}/frames/main_menu/frame.hpp"
     "${sk_source_dir}/frames/main_menu/frame.cpp"
@@ -116,8 +122,7 @@ if(sk_pedantic_exceptions)
 endif()
 
 if(sk_build_opensk)
-    add_executable(opensk "${sk_source_dir}/main.cpp"
-        math/point.hpp)
+    add_executable(opensk "${sk_source_dir}/main.cpp")
     target_link_libraries(opensk opensk_lib)
 
     set_target_properties(
