@@ -1,11 +1,11 @@
-# include <options.hpp>
-# include <config.hpp>
+#include <config.hpp>
+#include <options.hpp>
 
-# include <core/create.hpp>
-# include <core/engine.hpp>
+#include <core/create.hpp>
+#include <core/engine.hpp>
 
-# include <spdlog/spdlog.h>
-# include <tracy/Tracy.hpp>
+#include <spdlog/spdlog.h>
+#include <tracy/Tracy.hpp>
 
 void enable_debug_logging() {
     using sk::config::BuildOptionsEnum;
@@ -22,10 +22,14 @@ int main(int argc, const char* argv[]) {
     enable_debug_logging();
 
     auto options = sk::read_options(argc, argv);
-    if (!options) return 0;
+    if (!options) {
+        return 0;
+    }
 
     auto engine = sk::create<sk::Engine>(options.value());
-    if (!engine) return -1;
+    if (!engine) {
+        return -1;
+    }
 
     engine->run();
 

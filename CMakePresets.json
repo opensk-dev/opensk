@@ -1,244 +1,244 @@
 {
-  "version": 6,
-  "buildPresets": [
-    {
-      "name": "release",
-      "configurePreset": "release",
-      "configuration": "MinSizeRel"
-    },
-    {
-      "name": "debug",
-      "configurePreset": "debug",
-      "configuration": "Debug"
-    },
-    {
-      "name": "build-tests",
-      "configurePreset": "configure-tests",
-      "configuration": "Debug"
-    },
-    {
-      "name": "profile",
-      "configurePreset": "profile",
-      "configuration": "Debug"
-    }
-  ],
-  "configurePresets": [
-    {
-      "hidden": true,
-      "name": "_setup.cmake_build_type.release",
-      "description": "CMAKE_BUILD_TYPE=Release preset",
-      "binaryDir": "${sourceDir}/cmake-build-release",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
-      },
-      "environment": {
-        "CMAKE_CONFIG_TYPE": "Release"
-      }
-    },
-    {
-      "hidden": true,
-      "name": "_setup.cmake_build_type.debug",
-      "description": "CMAKE_BUILD_TYPE=Debug preset",
-      "binaryDir": "${sourceDir}/cmake-build-debug",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
-      },
-      "environment": {
-        "CMAKE_CONFIG_TYPE": "Debug"
-      }
-    },
-    {
-      "inherits": [
-        "_setup.cmake_build_type.release"
-      ],
-      "name": "release",
-      "displayName": "Release preset",
-      "binaryDir": "${sourceDir}/cmake-build-${hostSystemName}-release",
-      "cacheVariables": {
-        "sk_build_opensk": {
-          "type": "BOOL",
-          "value": "ON"
-        },
-        "sk_build_tests": {
-          "type": "BOOL",
-          "value": "OFF"
-        },
-        "sk_pedantic_exceptions": {
-          "type": "BOOL",
-          "value": "OFF"
-        },
-        "sk_debug_output": {
-          "type": "BOOL",
-          "value": "OFF"
-        },
-        "sk_profiling": {
-          "type": "BOOL",
-          "value": "OFF"
-        },
-        "sk_physics_debug": {
-          "type": "BOOL",
-          "value": "OFF"
-        }
-      }
-    },
-    {
-      "inherits": [
-        "_setup.cmake_build_type.debug"
-      ],
-      "name": "debug",
-      "displayName": "Debug preset",
-      "binaryDir": "${sourceDir}/cmake-build-${hostSystemName}-debug",
-      "cacheVariables": {
-        "sk_build_opensk": {
-          "type": "BOOL",
-          "value": "ON"
-        },
-        "sk_build_tests": {
-          "type": "BOOL",
-          "value": "OFF"
-        },
-        "sk_pedantic_exceptions": {
-          "type": "BOOL",
-          "value": "ON"
-        },
-        "sk_debug_output": {
-          "type": "BOOL",
-          "value": "ON"
-        },
-        "sk_profiling": {
-          "type": "BOOL",
-          "value": "OFF"
-        },
-        "sk_physics_debug": {
-          "type": "BOOL",
-          "value": "OFF"
-        }
-      }
-    },
-    {
-      "inherits": [
-        "_setup.cmake_build_type.debug"
-      ],
-      "name": "configure-tests",
-      "displayName": "Build tests preset",
-      "binaryDir": "${sourceDir}/cmake-build-${hostSystemName}-tests",
-      "cacheVariables": {
-        "sk_build_opensk": {
-          "type": "BOOL",
-          "value": "OFF"
-        },
-        "sk_build_tests": {
-          "type": "BOOL",
-          "value": "ON"
-        },
-        "sk_pedantic_exceptions": {
-          "type": "BOOL",
-          "value": "ON"
-        },
-        "sk_debug_output": {
-          "type": "BOOL",
-          "value": "ON"
-        },
-        "sk_profiling": {
-          "type": "BOOL",
-          "value": "OFF"
-        },
-        "sk_physics_debug": {
-          "type": "BOOL",
-          "value": "OFF"
-        }
-      }
-    },
-    {
-      "inherits": [
-        "_setup.cmake_build_type.debug"
-      ],
-      "name": "profile",
-      "displayName": "Profiling preset",
-      "binaryDir": "${sourceDir}/cmake-build-${hostSystemName}-profile",
-      "cacheVariables": {
-        "sk_build_opensk": {
-          "type": "BOOL",
-          "value": "ON"
-        },
-        "sk_build_tests": {
-          "type": "BOOL",
-          "value": "OFF"
-        },
-        "sk_pedantic_exceptions": {
-          "type": "BOOL",
-          "value": "ON"
-        },
-        "sk_debug_output": {
-          "type": "BOOL",
-          "value": "ON"
-        },
-        "sk_profiling": {
-          "type": "BOOL",
-          "value": "ON"
-        },
-        "sk_physics_debug": {
-          "type": "BOOL",
-          "value": "ON"
-        }
-      }
-    }
-  ],
-  "testPresets": [
-    {
-      "hidden": true,
-      "name": "_test.common",
-      "output": {
-        "verbosity": "verbose",
-        "outputOnFailure": true,
-        "outputLogFile": "ctest_output.log"
-      },
-      "execution": {
-        "noTestsAction": "error",
-        "stopOnFailure": false
-      }
-    },
-    {
-      "inherits": [
-        "_test.common"
-      ],
-      "name": "tests",
-      "configurePreset": "configure-tests",
-      "configuration": "debug"
-    }
-  ],
-  "workflowPresets": [
-    {
-      "name": "release-build",
-      "steps": [
+    "version": 6,
+    "buildPresets": [
         {
-          "name": "release",
-          "type": "configure"
+            "name": "release",
+            "configurePreset": "release",
+            "configuration": "MinSizeRel"
         },
         {
-          "name": "release",
-          "type": "build"
-        }
-      ]
-    },
-    {
-      "name": "run-tests",
-      "steps": [
-        {
-          "name": "configure-tests",
-          "type": "configure"
+            "name": "debug",
+            "configurePreset": "debug",
+            "configuration": "Debug"
         },
         {
-          "name": "build-tests",
-          "type": "build"
+            "name": "build-tests",
+            "configurePreset": "configure-tests",
+            "configuration": "Debug"
         },
         {
-          "name": "tests",
-          "type": "test"
+            "name": "profile",
+            "configurePreset": "profile",
+            "configuration": "Debug"
         }
-      ]
-    }
-  ]
+    ],
+    "configurePresets": [
+        {
+            "hidden": true,
+            "name": "_setup.cmake_build_type.release",
+            "description": "CMAKE_BUILD_TYPE=Release preset",
+            "binaryDir": "${sourceDir}/cmake-build-release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            },
+            "environment": {
+                "CMAKE_CONFIG_TYPE": "Release"
+            }
+        },
+        {
+            "hidden": true,
+            "name": "_setup.cmake_build_type.debug",
+            "description": "CMAKE_BUILD_TYPE=Debug preset",
+            "binaryDir": "${sourceDir}/cmake-build-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            },
+            "environment": {
+                "CMAKE_CONFIG_TYPE": "Debug"
+            }
+        },
+        {
+            "inherits": [
+                "_setup.cmake_build_type.release"
+            ],
+            "name": "release",
+            "displayName": "Release preset",
+            "binaryDir": "${sourceDir}/cmake-build-${hostSystemName}-release",
+            "cacheVariables": {
+                "sk_build_opensk": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "sk_build_tests": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                },
+                "sk_pedantic_exceptions": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                },
+                "sk_debug_output": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                },
+                "sk_profiling": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                },
+                "sk_physics_debug": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                }
+            }
+        },
+        {
+            "inherits": [
+                "_setup.cmake_build_type.debug"
+            ],
+            "name": "debug",
+            "displayName": "Debug preset",
+            "binaryDir": "${sourceDir}/cmake-build-${hostSystemName}-debug",
+            "cacheVariables": {
+                "sk_build_opensk": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "sk_build_tests": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                },
+                "sk_pedantic_exceptions": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "sk_debug_output": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "sk_profiling": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                },
+                "sk_physics_debug": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                }
+            }
+        },
+        {
+            "inherits": [
+                "_setup.cmake_build_type.debug"
+            ],
+            "name": "configure-tests",
+            "displayName": "Build tests preset",
+            "binaryDir": "${sourceDir}/cmake-build-${hostSystemName}-tests",
+            "cacheVariables": {
+                "sk_build_opensk": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                },
+                "sk_build_tests": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "sk_pedantic_exceptions": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "sk_debug_output": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "sk_profiling": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                },
+                "sk_physics_debug": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                }
+            }
+        },
+        {
+            "inherits": [
+                "_setup.cmake_build_type.debug"
+            ],
+            "name": "profile",
+            "displayName": "Profiling preset",
+            "binaryDir": "${sourceDir}/cmake-build-${hostSystemName}-profile",
+            "cacheVariables": {
+                "sk_build_opensk": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "sk_build_tests": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                },
+                "sk_pedantic_exceptions": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "sk_debug_output": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "sk_profiling": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "sk_physics_debug": {
+                    "type": "BOOL",
+                    "value": "ON"
+                }
+            }
+        }
+    ],
+    "testPresets": [
+        {
+            "hidden": true,
+            "name": "_test.common",
+            "output": {
+                "verbosity": "verbose",
+                "outputOnFailure": true,
+                "outputLogFile": "ctest_output.log"
+            },
+            "execution": {
+                "noTestsAction": "error",
+                "stopOnFailure": false
+            }
+        },
+        {
+            "inherits": [
+                "_test.common"
+            ],
+            "name": "tests",
+            "configurePreset": "configure-tests",
+            "configuration": "debug"
+        }
+    ],
+    "workflowPresets": [
+        {
+            "name": "release-build",
+            "steps": [
+                {
+                    "name": "release",
+                    "type": "configure"
+                },
+                {
+                    "name": "release",
+                    "type": "build"
+                }
+            ]
+        },
+        {
+            "name": "run-tests",
+            "steps": [
+                {
+                    "name": "configure-tests",
+                    "type": "configure"
+                },
+                {
+                    "name": "build-tests",
+                    "type": "build"
+                },
+                {
+                    "name": "tests",
+                    "type": "test"
+                }
+            ]
+        }
+    ]
 }

@@ -1,6 +1,6 @@
-# include <core/frame.hpp>
-# include <core/exceptions.hpp>
-# include <config.hpp>
+#include <config.hpp>
+#include <core/exceptions.hpp>
+#include <core/frame.hpp>
 
 namespace sk {
 
@@ -68,8 +68,7 @@ bool Frame::is_enabled() const {
     return is_enabled_;
 }
 
-FrameHolder::FrameHolder(Frame* frame)
-    : frame_ptr_(frame) {
+FrameHolder::FrameHolder(Frame* frame) : frame_ptr_(frame) {
     if (frame != nullptr) {
         frame->on_enable();
     }
@@ -113,4 +112,4 @@ Frame* FrameHolder::get() {
     return frame_ptr_;
 }
 
-} // sk
+}// namespace sk

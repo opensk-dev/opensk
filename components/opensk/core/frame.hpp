@@ -1,17 +1,18 @@
-# ifndef SK_CORE_FRAME_HPP_
-# define SK_CORE_FRAME_HPP_
+#ifndef SK_CORE_FRAME_HPP_
+#define SK_CORE_FRAME_HPP_
 
-# include <exception>
+#include <exception>
 
 namespace sk {
 
 class Engine;
+
 class FrameHolder;
 
 class Frame {
     friend FrameHolder;
 
-public:
+  public:
     Frame() = default;
     virtual ~Frame() noexcept(false);
 
@@ -27,10 +28,10 @@ public:
     [[nodiscard]] bool is_initialized() const;
     [[nodiscard]] bool is_enabled() const;
 
-protected:
+  protected:
     static Engine& get_engine();
 
-private:
+  private:
     inline static Engine* engine_ptr_ = nullptr;
     bool is_initialized_ = false;
     bool is_enabled_ = false;
@@ -39,12 +40,12 @@ private:
 class FrameHolder {
     friend Engine;
 
-public:
+  public:
     FrameHolder() = default;
     ~FrameHolder();
 
-    FrameHolder(const FrameHolder& other) = delete;
-    FrameHolder& operator=(const FrameHolder& other) = delete;
+    FrameHolder(FrameHolder const& other) = delete;
+    FrameHolder& operator=(FrameHolder const& other) = delete;
 
     FrameHolder(FrameHolder&& other) noexcept;
     FrameHolder& operator=(FrameHolder&& other) noexcept;
@@ -54,13 +55,13 @@ public:
 
     Frame* get();
 
-protected:
+  protected:
     static void set_engine_ptr(Engine* engine_ptr);
 
-private:
+  private:
     Frame* frame_ptr_ = nullptr;
 };
 
-} // sk
+} // namespace sk
 
-# endif // SK_CORE_FRAME_HPP_
+#endif // SK_CORE_FRAME_HPP_

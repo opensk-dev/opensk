@@ -1,20 +1,20 @@
-# ifndef SK_CORE_RUNTIME_HPP_
-# define SK_CORE_RUNTIME_HPP_
+#ifndef SK_CORE_RUNTIME_HPP_
+#define SK_CORE_RUNTIME_HPP_
 
-# include <core/runtime_arena.hpp>
+#include <core/runtime_arena.hpp>
 
-# include <cstdint>
+#include <cstdint>
 
 namespace sk {
 
 class Task;
 
 class Runtime {
-public:
+  public:
     explicit Runtime(std::uint32_t concurrency);
 
-    Runtime(const Runtime& other) = delete;
-    Runtime& operator=(const Runtime& other) = delete;
+    Runtime(Runtime const& other) = delete;
+    Runtime& operator=(Runtime const& other) = delete;
 
     Runtime(Runtime&& other) noexcept = default;
     Runtime& operator=(Runtime&& other) noexcept = default;
@@ -28,10 +28,10 @@ public:
 
     [[nodiscard]] RuntimeArena& get_main_arena();
 
-private:
+  private:
     RuntimeArena main_arena_{RuntimeArena::Managed{}};
 };
 
-} // sk
+} // namespace sk
 
-# endif // SK_CORE_RUNTIME_HPP_
+#endif // SK_CORE_RUNTIME_HPP_

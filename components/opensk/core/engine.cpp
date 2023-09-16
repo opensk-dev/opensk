@@ -1,15 +1,14 @@
-# include <core/create.hpp>
-# include <core/engine.hpp>
-# include <core/exceptions.hpp>
+#include <core/create.hpp>
+#include <core/engine.hpp>
+#include <core/exceptions.hpp>
 
-# include <options.hpp>
+#include <options.hpp>
 
-# include <tracy/Tracy.hpp>
+#include <tracy/Tracy.hpp>
 
 namespace sk {
 
-Engine::Engine(const ConfigureOptions& options)
-    : settings_(options.settings_path) {
+Engine::Engine(ConfigureOptions const& options) : settings_(options.settings_path) {
     ZoneScopedNC("initialize engine", tracy::Color::Aqua);
     FrameHolder::set_engine_ptr(this);
     settings_.load("hardware.ini", "hardware");

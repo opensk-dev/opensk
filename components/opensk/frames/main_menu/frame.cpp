@@ -1,7 +1,7 @@
-# include <frames/main_menu/frame.hpp>
-# include <core/engine.hpp>
+#include <core/engine.hpp>
+#include <frames/main_menu/frame.hpp>
 
-# include <spdlog/spdlog.h>
+#include <spdlog/spdlog.h>
 
 namespace sk {
 
@@ -28,4 +28,4 @@ void MainMenuFrame::on_disable() {
     spdlog::info("disable main menu");
 }
 
-} // sk
+}// namespace sk

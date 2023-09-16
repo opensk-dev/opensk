@@ -1,8 +1,8 @@
-# ifndef SK_READ_OPTIONS_HPP_
-# define SK_READ_OPTIONS_HPP_
+#ifndef SK_READ_OPTIONS_HPP_
+#define SK_READ_OPTIONS_HPP_
 
-# include <optional>
-# include <filesystem>
+#include <filesystem>
+#include <optional>
 
 namespace sk {
 
@@ -14,6 +14,6 @@ struct ConfigureOptions {
 
 std::optional<ConfigureOptions> read_options(int argc, const char* argv[]) noexcept;
 
-}
+} // namespace sk
 
-# endif // SK_READ_OPTIONS_HPP_
+#endif // SK_READ_OPTIONS_HPP_

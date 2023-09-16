@@ -1,5 +1,5 @@
-# include <config.hpp>
-# include <config_def.hpp>
+#include <config.hpp>
+#include <config_def.hpp>
 
 namespace sk {
 namespace config {
@@ -28,12 +28,12 @@ bool is_enabled<BuildOptionsEnum::physics_debug>() {
     return SK_PHYSICS_DEBUG;
 }
 
-} // config
+}// namespace config
 
-void throw_pedantic(const std::exception& ex) {
+void throw_pedantic(std::exception const& ex) {
     if (sk::config::is_enabled<sk::config::BuildOptionsEnum::pedantic_exceptions>()) {
         throw ex;
     }
 }
 
-} // sk
+}// namespace sk

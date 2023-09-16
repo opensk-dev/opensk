@@ -1,26 +1,26 @@
-# ifndef SK_CORE_RUNTIME_ARENA_HPP_
-# define SK_CORE_RUNTIME_ARENA_HPP_
+#ifndef SK_CORE_RUNTIME_ARENA_HPP_
+#define SK_CORE_RUNTIME_ARENA_HPP_
 
-# include <core/task.hpp>
-# include <tbb/concurrent_queue.h>
+#include <core/task.hpp>
+#include <tbb/concurrent_queue.h>
 
-# include <functional>
-# include <optional>
-# include <thread>
+#include <functional>
+#include <optional>
+#include <thread>
 
 namespace sk {
 
 class RuntimeArena {
-public:
+  public:
     RuntimeArena();
 
     struct Managed {};
-    explicit RuntimeArena(const Managed&);
+    explicit RuntimeArena(Managed const&);
 
     ~RuntimeArena();
 
-    RuntimeArena(const RuntimeArena& other) = delete;
-    RuntimeArena& operator=(const RuntimeArena& other) = delete;
+    RuntimeArena(RuntimeArena const& other) = delete;
+    RuntimeArena& operator=(RuntimeArena const& other) = delete;
 
     RuntimeArena(RuntimeArena&& other) noexcept = default;
     RuntimeArena& operator=(RuntimeArena&& other) noexcept = default;
@@ -32,12 +32,13 @@ public:
     void capture();
     void stop_in_future();
 
-private:
+  private:
     void working_loop();
 
     struct Control {
-        explicit Control(const std::function<void()>& working_loop);
-        explicit Control(const Managed&) {};
+        explicit Control(std::function<void()> const& working_loop);
+
+        explicit Control(Managed const&) {};
 
         bool on_fire() const;
 
@@ -51,6 +52,6 @@ private:
     std::unique_ptr<Control> control_ptr_{};
 };
 
-} // sk
+} // namespace sk
 
-# endif // SK_CORE_RUNTIME_ARENA_HPP_
+#endif // SK_CORE_RUNTIME_ARENA_HPP_

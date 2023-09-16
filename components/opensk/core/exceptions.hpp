@@ -1,58 +1,58 @@
-# ifndef SK_CORE_EXCEPTIONS_HPP_
-# define SK_CORE_EXCEPTIONS_HPP_
+#ifndef SK_CORE_EXCEPTIONS_HPP_
+#define SK_CORE_EXCEPTIONS_HPP_
 
-# include <stdexcept>
+#include <stdexcept>
 
 namespace sk::exceptions {
 
 // Common
 
 class BadAccess : public std::runtime_error {
-public:
-    explicit BadAccess(const std::string& whats_exactly);
+  public:
+    explicit BadAccess(std::string const& whats_exactly);
 };
 
 class ThreadAssert : public BadAccess {
-public:
+  public:
     ThreadAssert();
 };
 
 // Frame
 
 class FrameBadAccess : public BadAccess {
-public:
+  public:
     explicit FrameBadAccess(const char* details);
 };
 
 // Engine
 
 class EngineInitializationFailure : public std::runtime_error {
-public:
+  public:
     explicit EngineInitializationFailure(const char* message);
 };
 
 class FailedToInitializeRuntime : public EngineInitializationFailure {
-public:
+  public:
     FailedToInitializeRuntime();
 };
 
 class FailedToInitializePhysics : public EngineInitializationFailure {
-public:
+  public:
     FailedToInitializePhysics();
 };
 
 // Runtime
 
 class RuntimeInitializationFailure : public std::runtime_error {
-public:
-    explicit RuntimeInitializationFailure(const std::string& message);
+  public:
+    explicit RuntimeInitializationFailure(std::string const& message);
 };
 
 class UnsupportedHardwareConstraint : public RuntimeInitializationFailure {
-public:
+  public:
     explicit UnsupportedHardwareConstraint(const char* constraint);
 };
 
-} // sk::exceptions
+} // namespace sk::exceptions
 
-# endif // SK_CORE_EXCEPTIONS_HPP_
+#endif // SK_CORE_EXCEPTIONS_HPP_

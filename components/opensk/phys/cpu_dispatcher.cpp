@@ -1,13 +1,12 @@
-# include <phys/cpu_dispatcher.hpp>
+#include <phys/cpu_dispatcher.hpp>
 
-# include <physx/task/PxTask.h>
+#include <physx/task/PxTask.h>
 
-# include <tracy/Tracy.hpp>
+#include <tracy/Tracy.hpp>
 
 namespace sk {
 
-PhysicsCpuDispatcher::PhysicsCpuDispatcher(tbb::task_arena& task_arena)
-    : task_arena_(task_arena) {
+PhysicsCpuDispatcher::PhysicsCpuDispatcher(tbb::task_arena& task_arena) : task_arena_(task_arena) {
     task_arena_.initialize();
 }
 
@@ -23,4 +22,4 @@ std::uint32_t PhysicsCpuDispatcher::getWorkerCount() const {
     return task_arena_.max_concurrency();
 }
 
-} // sk
+}// namespace sk

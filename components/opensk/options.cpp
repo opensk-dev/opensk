@@ -1,14 +1,14 @@
-# include <options.hpp>
-# include <config.hpp>
+#include <config.hpp>
+#include <options.hpp>
 
-# include <boost/program_options.hpp>
+#include <boost/program_options.hpp>
 
-# include <spdlog/spdlog.h>
-# include <tracy/Tracy.hpp>
+#include <spdlog/spdlog.h>
+#include <tracy/Tracy.hpp>
 
-# include <iostream>
-# include <fstream>
-# include <format>
+#include <format>
+#include <fstream>
+#include <iostream>
 
 std::optional<sk::ConfigureOptions> sk::read_options(int argc, const char* argv[]) noexcept {
     namespace po = boost::program_options;
@@ -21,21 +21,18 @@ std::optional<sk::ConfigureOptions> sk::read_options(int argc, const char* argv[
 
     // setup options descriptions
     auto command_line_options_desc = po::options_description("Command line options");
-    command_line_options_desc.add_options()
-        ("help,h", "display this help message")
-        ("version,v", "display version string")
-        ("config", config_option_val, "Path to config file");
+    command_line_options_desc.add_options()("help,h", "display this help message")("version,v",
+        "display version string")("config", config_option_val, "Path to config file");
 
     auto configure_options_desc = po::options_description("Configuration");
-    configure_options_desc.add_options()
-        ("data-path", po::value<path>(), "Path to data folder")
-        ("settings-path", po::value<path>(), "Path to settings folder")
-        ("saves-path", po::value<path>(), "Path to folder contained saves");
+    configure_options_desc.add_options()("data-path", po::value<path>(), "Path to data folder")("settings-path",
+        po::value<path>(), "Path to settings folder")("saves-path", po::value<path>(),
+        "Path to folder contained saves");
 
     auto allowed_options_desc = po::options_description("Allowed options");
     allowed_options_desc.add(command_line_options_desc).add(configure_options_desc);
 
-    {   // handle command line
+    {// handle command line
         po::variables_map command_line_variables{};
 
         try {
@@ -63,7 +60,7 @@ std::optional<sk::ConfigureOptions> sk::read_options(int argc, const char* argv[
 
     sk::ConfigureOptions configure_options{};
 
-    {   // handle config file
+    {// handle config file
         auto config_file = std::ifstream(config_file_path);
         if (!config_file) {
             spdlog::error("couldn't open config file");
@@ -84,15 +81,14 @@ std::optional<sk::ConfigureOptions> sk::read_options(int argc, const char* argv[
             return {};
         }
 
-        auto try_get_option =
-            [&configure_variables](auto& option_place, const char* option_name) {
-                try {
-                    option_place = std::move(configure_variables.at(option_name).as<decltype(option_place)>());
-                } catch (const std::out_of_range& ex) {
-                    std::cout << std::format("config parameter '{}' not set\n", option_name);
-                    throw ex; // our work done. finish program;
-                }
-            };
+        auto try_get_option = [&configure_variables](auto& option_place, const char* option_name) {
+            try {
+                option_place = std::move(configure_variables.at(option_name).as<decltype(option_place)>());
+            } catch (const std::out_of_range& ex) {
+                std::cout << std::format("config parameter '{}' not set\n", option_name);
+                throw ex;// our work done. finish program;
+            }
+        };
 
         try {
             try_get_option(configure_options.data_path, "data-path");

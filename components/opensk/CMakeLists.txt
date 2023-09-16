@@ -2,13 +2,11 @@
 set(sk_gen_include_dir "${CMAKE_CURRENT_BINARY_DIR}/include/opensk")
 configure_file("${sk_source_dir}/config_def.hpp.in" "${sk_gen_include_dir}/config_def.hpp")
 
-set(
-    sk_gen_headers
+set(sk_gen_headers
     "${sk_gen_include_dir}/config_def.hpp"
 )
 
-set(
-    sk_sources
+set(sk_sources
     "${sk_source_dir}/options.hpp"
     "${sk_source_dir}/options.cpp"
     "${sk_source_dir}/config.hpp"
@@ -30,13 +28,10 @@ set(
     "${sk_source_dir}/core/runtime_arena.hpp"
     "${sk_source_dir}/core/runtime_arena.cpp"
 
-    "${sk_source_dir}/math/concepts/point.hpp"
-    "${sk_source_dir}/math/concepts/rect.hpp"
-
-    "${sk_source_dir}/math/point.hpp"
-    "${sk_source_dir}/math/rect.hpp"
-    "${sk_source_dir}/math/r_tree.hpp"
-    "${sk_source_dir}/math/r_tree.cpp"
+    "${sk_source_dir}/menu/traits.hpp"
+    "${sk_source_dir}/menu/menu.hpp"
+    "${sk_source_dir}/menu/menu.cpp"
+    "${sk_source_dir}/menu/button.hpp"
 
     "${sk_source_dir}/phys/exceptions.hpp"
     "${sk_source_dir}/phys/exceptions.cpp"
@@ -134,8 +129,7 @@ if(sk_build_opensk)
         RUNTIME_OUTPUT_DIRECTORY "${sk_output_dir}"
     )
 
-    add_custom_target(
-        sk_copy_resources
+    add_custom_target(sk_copy_resources
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${sk_resources_dir} $<TARGET_FILE_DIR:opensk>
         COMMENT "copying resources"
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}

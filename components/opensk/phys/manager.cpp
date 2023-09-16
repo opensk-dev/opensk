@@ -1,17 +1,17 @@
-# include <phys/manager.hpp>
-# include <phys/exceptions.hpp>
-# include <config.hpp>
+#include <config.hpp>
+#include <phys/exceptions.hpp>
+#include <phys/manager.hpp>
 
-# include <spdlog/spdlog.h>
-# include <tracy/Tracy.hpp>
+#include <spdlog/spdlog.h>
+#include <tracy/Tracy.hpp>
 
-# include <physx/PxPhysics.h>
-# include <physx/PxScene.h>
-# include <physx/foundation/PxPhysicsVersion.h>
-# include <physx/foundation/PxFoundation.h>
-# include <physx/common/PxTolerancesScale.h>
-# include <physx/extensions/PxDefaultAllocator.h>
-# include <physx/extensions/PxDefaultSimulationFilterShader.h>
+#include <physx/PxPhysics.h>
+#include <physx/PxScene.h>
+#include <physx/common/PxTolerancesScale.h>
+#include <physx/extensions/PxDefaultAllocator.h>
+#include <physx/extensions/PxDefaultSimulationFilterShader.h>
+#include <physx/foundation/PxFoundation.h>
+#include <physx/foundation/PxPhysicsVersion.h>
 
 namespace sk {
 
@@ -27,13 +27,8 @@ PhysicsManager::PhysicsManager(tbb::task_arena& task_arena) {
     if (sk::config::is_enabled<sk::config::BuildOptionsEnum::physics_debug>()) {
         pvd_client_.initialize(*foundation_ptr_);
     }
-    physics_ptr_ = PxCreatePhysics(
-        PX_PHYSICS_VERSION,
-        *foundation_ptr_,
-        physx::PxTolerancesScale(),
-        false,
-        pvd_client_.get_pvd()
-    );
+    physics_ptr_ =
+        PxCreatePhysics(PX_PHYSICS_VERSION, *foundation_ptr_, physx::PxTolerancesScale(), false, pvd_client_.get_pvd());
     if (!physics_ptr_) {
         physics_ptr_ = nullptr;
         throw sk::exceptions::FailedToCreatePhysicsInstance();
@@ -54,13 +49,10 @@ PhysicsManager::~PhysicsManager() {
     }
 }
 
-PhysicsManager::PhysicsManager(PhysicsManager&& other) noexcept
-    : error_callback_ptr_(std::move(other.error_callback_ptr_)),
-      allocator_callback_ptr_(std::move(other.allocator_callback_ptr_)),
-      cpu_dispatcher_ptr_(std::move(other.cpu_dispatcher_ptr_)),
-      pvd_client_(std::move(other.pvd_client_)),
-      foundation_ptr_(other.foundation_ptr_),
-      physics_ptr_(other.physics_ptr_) {
+PhysicsManager::PhysicsManager(PhysicsManager&& other) noexcept: error_callback_ptr_(
+    std::move(other.error_callback_ptr_)), allocator_callback_ptr_(std::move(other.allocator_callback_ptr_)),
+    cpu_dispatcher_ptr_(std::move(other.cpu_dispatcher_ptr_)), pvd_client_(std::move(other.pvd_client_)),
+    foundation_ptr_(other.foundation_ptr_), physics_ptr_(other.physics_ptr_) {
     other.foundation_ptr_ = nullptr;
     other.physics_ptr_ = nullptr;
 }
@@ -79,4 +71,4 @@ PhysicsManager& PhysicsManager::operator=(PhysicsManager&& other) noexcept {
     return *this;
 }
 
-} // sk
+}// namespace sk

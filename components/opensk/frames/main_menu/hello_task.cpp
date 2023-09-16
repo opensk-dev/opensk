@@ -1,9 +1,9 @@
-# include <frames/main_menu/hello_task.hpp>
+#include <frames/main_menu/hello_task.hpp>
 
-# include <tracy/Tracy.hpp>
-# include <spdlog/spdlog.h>
+#include <spdlog/spdlog.h>
+#include <tracy/Tracy.hpp>
 
-# include <thread>
+#include <thread>
 
 void sk::HelloTask::execute() {
     ZoneScopedNC("Hello, World! task", tracy::Color::Yellow);

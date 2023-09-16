@@ -1,22 +1,23 @@
-# ifndef SK_PHYSICS_PVD_CLIENT_HPP_
-# define SK_PHYSICS_PVD_CLIENT_HPP_
+#ifndef SK_PHYSICS_PVD_CLIENT_HPP_
+#define SK_PHYSICS_PVD_CLIENT_HPP_
 
 namespace physx {
 
 class PxPvd;
+
 class PxFoundation;
 
-}
+} // namespace physx
 
 namespace sk::debug {
 
 class PvdClient {
-public:
+  public:
     PvdClient() = default;
     ~PvdClient();
 
-    PvdClient(const PvdClient& other) = delete;
-    PvdClient& operator=(const PvdClient& other) = delete;
+    PvdClient(PvdClient const& other) = delete;
+    PvdClient& operator=(PvdClient const& other) = delete;
 
     PvdClient(PvdClient&& other) noexcept;
     PvdClient& operator=(PvdClient&& other) noexcept;
@@ -26,10 +27,10 @@ public:
 
     [[nodiscard]] physx::PxPvd* get_pvd() const;
 
-private:
+  private:
     physx::PxPvd* pvd_ptr_ = nullptr;
 };
 
-} // sk::debug
+} // namespace sk::debug
 
-# endif // SK_PHYSICS_PVD_CLIENT_HPP_
+#endif // SK_PHYSICS_PVD_CLIENT_HPP_

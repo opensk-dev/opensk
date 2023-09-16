@@ -1,30 +1,30 @@
-# ifndef SK_PHYSICS_EXTENSIONS_HPP_
-# define SK_PHYSICS_EXTENSIONS_HPP_
+#ifndef SK_PHYSICS_EXTENSIONS_HPP_
+#define SK_PHYSICS_EXTENSIONS_HPP_
 
-# include <stdexcept>
+#include <stdexcept>
 
 namespace sk::exceptions {
 
 class PhysicsInitializationFailure : public std::runtime_error {
-public:
+  public:
     explicit PhysicsInitializationFailure(const char* message);
 };
 
 class FailedToCreateFoundation : public PhysicsInitializationFailure {
-public:
+  public:
     FailedToCreateFoundation();
 };
 
 class FailedToCreatePhysicsInstance : public PhysicsInitializationFailure {
-public:
+  public:
     FailedToCreatePhysicsInstance();
 };
 
 class PhysicsAbort : public std::runtime_error {
-public:
+  public:
     explicit PhysicsAbort();
 };
 
-} // sk::exceptions
+} // namespace sk::exceptions
 
-# endif // SK_PHYSICS_EXTENSIONS_HPP_
+#endif // SK_PHYSICS_EXTENSIONS_HPP_

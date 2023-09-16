@@ -1,7 +1,7 @@
-# ifndef SK_CONFIG_HPP_
-# define SK_CONFIG_HPP_
+#ifndef SK_CONFIG_HPP_
+#define SK_CONFIG_HPP_
 
-# include <exception>
+#include <exception>
 
 namespace sk {
 namespace config {
@@ -18,10 +18,10 @@ enum class BuildOptionsEnum {
 template<BuildOptionsEnum option>
 bool is_enabled();
 
-} // config
+} // namespace config
 
-void throw_pedantic(const std::exception& ex);
+void throw_pedantic(std::exception const& ex);
 
-} // sk
+} // namespace sk
 
-# endif // SK_CONFIG_HPP_
+#endif // SK_CONFIG_HPP_

@@ -1,7 +1,7 @@
-# include <core/runtime.hpp>
-# include <core/exceptions.hpp>
+#include <core/exceptions.hpp>
+#include <core/runtime.hpp>
 
-# include <thread>
+#include <thread>
 
 namespace sk {
 
@@ -16,10 +16,10 @@ Runtime::Runtime(std::uint32_t concurrency) {
 
 void Runtime::push_task(Runtime::ArenasEnum arena, Task* task) {
     switch (arena) {
-        case ArenasEnum::main: {
-            main_arena_.push_task(task);
-            break;
-        }
+    case ArenasEnum::main: {
+        main_arena_.push_task(task);
+        break;
+    }
     }
 }
 
@@ -31,4 +31,4 @@ RuntimeArena& Runtime::get_main_arena() {
     return main_arena_;
 }
 
-} // sk
+}// namespace sk

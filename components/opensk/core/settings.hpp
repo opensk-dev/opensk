@@ -1,35 +1,35 @@
-# ifndef SK_CORE_SETTINGS_HPP_
-# define SK_CORE_SETTINGS_HPP_
+#ifndef SK_CORE_SETTINGS_HPP_
+#define SK_CORE_SETTINGS_HPP_
 
-# include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ptree.hpp>
 
-# include <filesystem>
+#include <filesystem>
 
 namespace sk {
 
 class Settings {
-public:
+  public:
     explicit Settings(std::filesystem::path settings_folder_path);
     ~Settings() = default;
 
-    Settings(const Settings& other) = delete;
-    Settings& operator=(const Settings& other) = delete;
+    Settings(Settings const& other) = delete;
+    Settings& operator=(Settings const& other) = delete;
 
     Settings(Settings&& other) noexcept = default;
     Settings& operator=(Settings&& other) noexcept = default;
 
-    void load(const std::filesystem::path& file_path, const std::string& subtree_path);
+    void load(std::filesystem::path const& file_path, std::string const& subtree_path);
 
     template<class T>
-    T get(const std::string& path) {
+    T get(std::string const& path) {
         return settings_.get<T>(path);
     }
 
-private:
+  private:
     std::filesystem::path settings_folder_path_;
     boost::property_tree::ptree settings_{};
 };
 
-} // sk
+} // namespace sk
 
-# endif // SK_CORE_SETTINGS_HPP_
+#endif // SK_CORE_SETTINGS_HPP_

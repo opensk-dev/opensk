@@ -1,13 +1,13 @@
-# include <core/runtime_arena.hpp>
+#include <core/runtime_arena.hpp>
 
-# include <spdlog/spdlog.h>
-# include <tracy/Tracy.hpp>
+#include <spdlog/spdlog.h>
+#include <tracy/Tracy.hpp>
 
 namespace sk {
 
-RuntimeArena::Control::Control(const std::function<void()>& working_loop)
-    : is_working(true),
-      working_thread(working_loop) {}
+RuntimeArena::Control::Control(std::function<void()> const& working_loop) : is_working(true),
+    working_thread(working_loop) {
+}
 
 bool RuntimeArena::Control::on_fire() const {
     return !tasks_queue.empty() || (is_working.load() && !is_should_exit.load());
@@ -20,7 +20,7 @@ RuntimeArena::RuntimeArena() {
     control_ptr_ = std::make_unique<Control>(delegate);
 }
 
-RuntimeArena::RuntimeArena(const RuntimeArena::Managed& managed) {
+RuntimeArena::RuntimeArena(RuntimeArena::Managed const& managed) {
     control_ptr_ = std::make_unique<Control>(managed);
 }
 
@@ -56,10 +56,9 @@ void RuntimeArena::start() {
     }
     std::lock_guard lock(control.mtx);
     control.is_working = true;
-    control.working_thread.emplace(
-        [this]() {
-            working_loop();
-        });
+    control.working_thread.emplace([this]() {
+        working_loop();
+    });
 }
 
 void RuntimeArena::stop() {
