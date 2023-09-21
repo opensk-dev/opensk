@@ -19,6 +19,8 @@ class Menu {
     Menu(Menu&& other) noexcept = default;
     Menu& operator=(Menu&& other) noexcept = default;
 
+    void update(sk::menu::traits::point_type cursor_position);
+
   private:
     boost::geometry::index::rtree<
         sk::menu::Button,
