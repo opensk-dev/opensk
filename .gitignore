@@ -1,0 +1,11 @@
+/[Bb]uild/
+/[Oo]ut/
+/[Bb]in/
+
+/.idea/
+/cmake-build-*/
+/.vs/
+/.vscode/
+
+ctest_output.log
+CMakeUserPresets.json
