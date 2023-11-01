@@ -51,6 +51,9 @@ jobs:
 
     - name: Run vcpkg
       uses: lukka/run-vcpkg@v4
+      with:
+        vcpkgArguments: 'boost'
+        vcpkgDirectory: '${{ github.workspace }}/vcpkg'
 
     - name: Test
       run: cmake --workflow --preset run-tests
