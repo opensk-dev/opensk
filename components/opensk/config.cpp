@@ -4,7 +4,7 @@
 namespace sk {
 namespace config {
 
-constexpr const char* version_string() {
+const char* version_string() {
     return SK_VERSION_STRING;
 }
 

@@ -6,7 +6,7 @@
 namespace sk {
 namespace config {
 
-extern constexpr const char* version_string();
+extern const char* version_string();
 
 enum class BuildOptionsEnum {
     pedantic_exceptions,

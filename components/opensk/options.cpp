@@ -94,7 +94,7 @@ std::optional<sk::ConfigureOptions> sk::read_options(int argc, const char* argv[
             try_get_option(configure_options.data_path, "data-path");
             try_get_option(configure_options.settings_path, "settings-path");
             try_get_option(configure_options.saves_path, "saves-path");
-        } catch (const std::exception& ex) {
+        } catch (const std::exception&) {
             return {};
         }
     }
