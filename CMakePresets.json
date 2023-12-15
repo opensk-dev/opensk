@@ -17,21 +17,6 @@
       "configuration": "Debug"
     },
     {
-      "name": "build.vs-clang.minsizerel",
-      "configurePreset": "config.vs-clang.minsizerel",
-      "configuration": "MinSizeRel"
-    },
-    {
-      "name": "build.vs-clang.release",
-      "configurePreset": "config.vs-clang.release",
-      "configuration": "Release"
-    },
-    {
-      "name": "build.vs-clang.debug",
-      "configurePreset": "config.vs-clang.debug",
-      "configuration": "Debug"
-    },
-    {
       "name": "build.tests",
       "configurePreset": "config.tests",
       "configuration": "Debug"
@@ -53,22 +38,6 @@
     {
       "hidden": true,
       "name": "_setup.toolchain.default"
-    },
-    {
-      "hidden": true,
-      "name": "_setup.toolchain.vs-clang",
-      "toolset": "ClangCL",
-      "cacheVariables": {
-        "LLVM_ENABLE_RUNTIMES": "libcxx",
-        "LIBCXX_ENABLE_SHARED": {
-          "type": "BOOL",
-          "value": "YES"
-        },
-        "LIBCXX_ENABLE_STATIC": {
-          "type": "BOOL",
-          "value": "NO"
-        }
-      }
     },
     {
       "hidden": true,
@@ -247,36 +216,6 @@
       "inherits": [
         "_setup.common",
         "_setup.toolchain.default",
-        "_setup.config.debug"
-      ]
-    },
-    {
-      "name": "config.vs-clang.minsizerel",
-      "displayName": "ClangCL MinSizeRel",
-      "binaryDir": "${sourceDir}/cmake-build/${hostSystemName}/vs-clang/minsizerel",
-      "inherits": [
-        "_setup.common",
-        "_setup.toolchain.vs-clang",
-        "_setup.config.minsizerel"
-      ]
-    },
-    {
-      "name": "config.vs-clang.release",
-      "displayName": "ClangCL Release",
-      "binaryDir": "${sourceDir}/cmake-build/${hostSystemName}/vs-clang/release",
-      "inherits": [
-        "_setup.common",
-        "_setup.toolchain.vs-clang",
-        "_setup.config.release"
-      ]
-    },
-    {
-      "name": "config.vs-clang.debug",
-      "displayName": "ClangCL Debug",
-      "binaryDir": "${sourceDir}/cmake-build/${hostSystemName}/vs-clang/debug",
-      "inherits": [
-        "_setup.common",
-        "_setup.toolchain.vs-clang",
         "_setup.config.debug"
       ]
     },
