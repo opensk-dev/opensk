@@ -1,5 +1,5 @@
-#ifndef __TRACY_HPP__
-#define __TRACY_HPP__
+#ifndef TRACY_HPP
+#define TRACY_HPP
 
 #include "../common/TracyColor.hpp"
 #include "../common/TracySystem.hpp"
@@ -115,4 +115,4 @@
 
 #endif // TRACY_ENABLE
 
-#endif // __TRACY_HPP__
+#endif // TRACY_HPP

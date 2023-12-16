@@ -1,5 +1,5 @@
-#ifndef __TRACYCOLOR_HPP__
-#define __TRACYCOLOR_HPP__
+#ifndef TRACYCOLOR_HPP
+#define TRACYCOLOR_HPP
 
 namespace tracy
 {

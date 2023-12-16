@@ -29,17 +29,4 @@ if(sk_build_tests)
     include(CTest)
 endif()
 
-# warnings will be applied to all targets.
-if(sk_pedantic_warnings)
-    if(MSVC)
-        message(STATUS "Set pedantic warnings for msvc")
-        add_compile_options(/W4 /WX /wd4996)
-    elseif(GNU OR Clang)
-        message(STATUS "Set pedantic warnings for gnu and clang")
-        add_compile_options(-Wall -Wextra -Wpedantic -Werror)
-    else()
-        message(WARNING "cannot set pedantic warnings: unsupported compiler")
-    endif()
-endif()
-
 add_subdirectory(components)

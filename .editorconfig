@@ -13,7 +13,7 @@ ij_formatter_off_tag = @formatter:off
 ij_formatter_on_tag = @formatter:on
 ij_formatter_tags_enabled = true
 ij_smart_tabs = false
-ij_visual_guides = 
+ij_visual_guides =
 ij_wrap_on_typing = false
 
 [.editorconfig]
@@ -130,7 +130,7 @@ ij_c_introduce_prop_to_private_category = false
 ij_c_introduce_static_consts = true
 ij_c_introduce_use_ns_types = false
 ij_c_ivars_prefix = _
-ij_c_ivars_suffix = 
+ij_c_ivars_suffix =
 ij_c_keep_blank_lines_before_end = 1
 ij_c_keep_blank_lines_before_right_brace = 1
 ij_c_keep_blank_lines_in_code = 1

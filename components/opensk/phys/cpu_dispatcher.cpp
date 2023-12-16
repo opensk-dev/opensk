@@ -19,7 +19,7 @@ void PhysicsCpuDispatcher::submitTask(physx::PxBaseTask& task) {
 }
 
 std::uint32_t PhysicsCpuDispatcher::getWorkerCount() const {
-    return task_arena_.max_concurrency();
+    return static_cast<std::uint32_t>(task_arena_.max_concurrency());
 }
 
-}// namespace sk
+} // namespace sk

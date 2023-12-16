@@ -17,4 +17,4 @@ void Settings::load(std::filesystem::path const& file_name, std::string const& s
     settings_.add_child(subtree_path, subtree);
 }
 
-}// namespace sk
+} // namespace sk

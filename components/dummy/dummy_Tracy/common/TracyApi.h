@@ -1,5 +1,5 @@
-#ifndef __TRACYAPI_H__
-#define __TRACYAPI_H__
+#ifndef TRACYAPI_H
+#define TRACYAPI_H
 
 #if defined _WIN32
 #  if defined TRACY_EXPORTS
@@ -13,4 +13,4 @@
 #  define TRACY_API __attribute__((visibility("default")))
 #endif
 
-#endif    // __TRACYAPI_H__
+#endif    // TRACYAPI_H

@@ -3,26 +3,31 @@
   "buildPresets": [
     {
       "name": "build.default.minsizerel",
+      "displayName": "Default - MinSizeRel",
       "configurePreset": "config.default.minsizerel",
       "configuration": "MinSizeRel"
     },
     {
       "name": "build.default.release",
+      "displayName": "Default - Release",
       "configurePreset": "config.default.release",
-      "configuration": "Release"
+      "configuration": "MinSizeRel"
     },
     {
       "name": "build.default.debug",
+      "displayName": "Default - Debug",
       "configurePreset": "config.default.debug",
       "configuration": "Debug"
     },
     {
       "name": "build.tests",
+      "displayName": "Default - Tests",
       "configurePreset": "config.tests",
       "configuration": "Debug"
     },
     {
       "name": "build.profile",
+      "displayName": "Default - Profile",
       "configurePreset": "config.profile",
       "configuration": "Debug"
     }

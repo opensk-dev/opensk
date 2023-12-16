@@ -31,4 +31,4 @@ RuntimeArena& Runtime::get_main_arena() {
     return main_arena_;
 }
 
-}// namespace sk
+} // namespace sk

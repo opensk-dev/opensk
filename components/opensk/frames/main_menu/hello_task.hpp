@@ -10,6 +10,8 @@ class HelloTask : public Task {
     HelloTask() = default;
     ~HelloTask() override = default;
 
+    HelloTask(HelloTask const&) = default;
+
     void execute() override;
 };
 

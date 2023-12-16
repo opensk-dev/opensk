@@ -17,4 +17,4 @@ FailedToCreatePhysicsInstance::FailedToCreatePhysicsInstance() : PhysicsInitiali
 PhysicsAbort::PhysicsAbort() : std::runtime_error("Physics abort had been called") {
 }
 
-}// namespace sk::exceptions
+} // namespace sk::exceptions

@@ -12,6 +12,7 @@ set(sk_sources
     "${sk_source_dir}/options.cpp"
     "${sk_source_dir}/config.hpp"
     "${sk_source_dir}/config.cpp"
+    "${sk_source_dir}/config_options.hpp"
 
     "${sk_source_dir}/core/exceptions.hpp"
     "${sk_source_dir}/core/exceptions.cpp"
@@ -52,8 +53,6 @@ source_group(TREE ${sk_source_dir} FILES ${sk_sources})
 list(APPEND sk_sources ${sk_gen_headers})
 
 add_library(opensk_setup INTERFACE)
-
-target_compile_features(opensk_setup INTERFACE cxx_std_23)
 
 include(GNUInstallDirs)
 
@@ -110,7 +109,7 @@ endif()
 
 if(sk_build_opensk)
     add_executable(opensk ${sk_sources})
-    target_link_libraries(opensk PUBLIC opensk_setup)
+    target_link_libraries(opensk PUBLIC opensk_setup compile_flags_setup)
 
     set_target_properties(
         opensk PROPERTIES

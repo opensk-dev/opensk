@@ -38,7 +38,7 @@ class RuntimeArena {
     struct Control {
         explicit Control(std::function<void()> const& working_loop);
 
-        explicit Control(Managed const&) {};
+        explicit Control(Managed const&) {}
 
         bool on_fire() const;
 

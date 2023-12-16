@@ -23,7 +23,7 @@ PhysicsManager::PhysicsManager(tbb::task_arena& task_arena) {
         foundation_ptr_ = nullptr;
         throw sk::exceptions::FailedToCreateFoundation();
     }
-    if (sk::config::is_enabled<sk::config::BuildOptionsEnum::physics_debug>()) {
+    if constexpr (sk::config::is_enabled<sk::config::BuildOptionsEnum::physics_debug>) {
         pvd_client_.initialize(*foundation_ptr_);
     }
     physics_ptr_ =
@@ -73,4 +73,4 @@ PhysicsManager& PhysicsManager::operator=(PhysicsManager&& other) noexcept {
     return *this;
 }
 
-}// namespace sk
+} // namespace sk

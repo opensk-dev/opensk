@@ -112,4 +112,4 @@ Frame* FrameHolder::get() {
     return frame_ptr_;
 }
 
-}// namespace sk
+} // namespace sk

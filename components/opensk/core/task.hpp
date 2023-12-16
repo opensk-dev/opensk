@@ -16,7 +16,7 @@ class Task {
 
     virtual void execute() = 0;
 
-    virtual void abort() {};
+    virtual void abort() {}
 };
 
 } // namespace sk

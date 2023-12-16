@@ -1,5 +1,5 @@
-#ifndef __TRACYSYSTEM_HPP__
-#define __TRACYSYSTEM_HPP__
+#ifndef TRACYSYSTEM_HPP
+#define TRACYSYSTEM_HPP
 
 #include <stdint.h>
 
