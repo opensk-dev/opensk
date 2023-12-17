@@ -1,0 +1,16 @@
+* text eol=lf
+
+.clang-tidy text
+.editorconfig text
+
+.gitignore text
+.gitmodules text
+.gitattributes text
+
+*.md text
+*.json text
+
+CMakeLists.txt text
+
+*.cpp text
+*.hpp text

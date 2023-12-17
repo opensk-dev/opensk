@@ -30,7 +30,7 @@ const char* version_string();
 
 #if (BOOST_COMP_CLANG != BOOST_VERSION_NUMBER_NOT_AVAILABLE)
 
-// Clang wants to mark that function [[noreturn]]
+// Clang wants to mark this function [[noreturn]]
 // But it will make whole code after throw_pedantic call unreachable
 
 #pragma clang diagnostic push
