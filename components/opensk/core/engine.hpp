@@ -18,17 +18,21 @@ struct ConfigureOptions;
 class Engine {
   public:
     explicit Engine(ConfigureOptions const& options);
+
     ~Engine();
 
     Engine(Engine const& other) = delete;
+
     Engine& operator=(Engine const& other) = delete;
 
     Engine(Engine&& other) noexcept = default;
+
     Engine& operator=(Engine&& other) noexcept = default;
 
     void run();
 
     Settings& get_settings();
+
     Runtime& get_runtime();
 
   private:
@@ -38,7 +42,6 @@ class Engine {
     std::optional<Runtime> runtime_{};
     std::optional<PhysicsManager> physics_manager_{};
 };
-
 } // namespace sk
 
 #endif // SK_CORE_ENGINE_HPP_

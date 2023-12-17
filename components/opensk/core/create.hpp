@@ -21,7 +21,6 @@ std::optional<T> create(Args&& ...args) {
     sk::create(t, std::forward<Args>(args)...);
     return t;
 }
-
 } // namespace sk
 
 #endif // SK_CORE_CREATE_HPP_

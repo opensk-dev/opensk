@@ -2,60 +2,51 @@
     "version": 6,
     "buildPresets": [
         {
-            "name": "release",
-            "configurePreset": "release",
+            "name": "build.default.minsizerel",
+            "displayName": "Default - MinSizeRel",
+            "configurePreset": "config.default.minsizerel",
             "configuration": "MinSizeRel"
         },
         {
-            "name": "debug",
-            "configurePreset": "debug",
+            "name": "build.default.release",
+            "displayName": "Default - Release",
+            "configurePreset": "config.default.release",
+            "configuration": "MinSizeRel"
+        },
+        {
+            "name": "build.default.debug",
+            "displayName": "Default - Debug",
+            "configurePreset": "config.default.debug",
             "configuration": "Debug"
         },
         {
-            "name": "build-tests",
-            "configurePreset": "configure-tests",
+            "name": "build.tests",
+            "displayName": "Default - Tests",
+            "configurePreset": "config.tests",
             "configuration": "Debug"
         },
         {
-            "name": "profile",
-            "configurePreset": "profile",
+            "name": "build.profile",
+            "displayName": "Default - Profile",
+            "configurePreset": "config.profile",
             "configuration": "Debug"
         }
     ],
     "configurePresets": [
         {
             "hidden": true,
-            "name": "_setup.cmake_build_type.release",
-            "description": "CMAKE_BUILD_TYPE=Release preset",
-            "binaryDir": "${sourceDir}/cmake-build-release",
+            "name": "_setup.common",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release",
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
-            },
-            "environment": {
-                "CMAKE_CONFIG_TYPE": "Release"
             }
         },
         {
             "hidden": true,
-            "name": "_setup.cmake_build_type.debug",
-            "description": "CMAKE_BUILD_TYPE=Debug preset",
-            "binaryDir": "${sourceDir}/cmake-build-debug",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
-            },
-            "environment": {
-                "CMAKE_CONFIG_TYPE": "Debug"
-            }
+            "name": "_setup.toolchain.default"
         },
         {
-            "inherits": [
-                "_setup.cmake_build_type.release"
-            ],
-            "name": "release",
-            "displayName": "Release preset",
-            "binaryDir": "${sourceDir}/cmake-build-${hostSystemName}-release",
+            "hidden": true,
+            "name": "_setup.config.minsizerel",
             "cacheVariables": {
                 "sk_build_opensk": {
                     "type": "BOOL",
@@ -84,12 +75,38 @@
             }
         },
         {
-            "inherits": [
-                "_setup.cmake_build_type.debug"
-            ],
-            "name": "debug",
-            "displayName": "Debug preset",
-            "binaryDir": "${sourceDir}/cmake-build-${hostSystemName}-debug",
+            "hidden": true,
+            "name": "_setup.config.release",
+            "cacheVariables": {
+                "sk_build_opensk": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "sk_build_tests": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                },
+                "sk_pedantic_exceptions": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "sk_debug_output": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                },
+                "sk_profiling": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                },
+                "sk_physics_debug": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                }
+            }
+        },
+        {
+            "hidden": true,
+            "name": "_setup.config.debug",
             "cacheVariables": {
                 "sk_build_opensk": {
                     "type": "BOOL",
@@ -118,12 +135,8 @@
             }
         },
         {
-            "inherits": [
-                "_setup.cmake_build_type.debug"
-            ],
-            "name": "configure-tests",
-            "displayName": "Build tests preset",
-            "binaryDir": "${sourceDir}/cmake-build-${hostSystemName}-tests",
+            "hidden": true,
+            "name": "_setup.config.tests",
             "cacheVariables": {
                 "sk_build_opensk": {
                     "type": "BOOL",
@@ -152,12 +165,8 @@
             }
         },
         {
-            "inherits": [
-                "_setup.cmake_build_type.debug"
-            ],
-            "name": "profile",
-            "displayName": "Profiling preset",
-            "binaryDir": "${sourceDir}/cmake-build-${hostSystemName}-profile",
+            "hidden": true,
+            "name": "_setup.config.profile",
             "cacheVariables": {
                 "sk_build_opensk": {
                     "type": "BOOL",
@@ -184,6 +193,56 @@
                     "value": "ON"
                 }
             }
+        },
+        {
+            "name": "config.default.minsizerel",
+            "displayName": "Default Release",
+            "binaryDir": "${sourceDir}/cmake-build/${hostSystemName}/default/minsizerel",
+            "inherits": [
+                "_setup.common",
+                "_setup.toolchain.default",
+                "_setup.config.minsizerel"
+            ]
+        },
+        {
+            "name": "config.default.release",
+            "displayName": "Default Release",
+            "binaryDir": "${sourceDir}/cmake-build/${hostSystemName}/default/release",
+            "inherits": [
+                "_setup.common",
+                "_setup.toolchain.default",
+                "_setup.config.release"
+            ]
+        },
+        {
+            "name": "config.default.debug",
+            "displayName": "Default Debug",
+            "binaryDir": "${sourceDir}/cmake-build/${hostSystemName}/default/debug",
+            "inherits": [
+                "_setup.common",
+                "_setup.toolchain.default",
+                "_setup.config.debug"
+            ]
+        },
+        {
+            "name": "config.tests",
+            "displayName": "Configure tests",
+            "binaryDir": "${sourceDir}/cmake-build/${hostSystemName}/test",
+            "inherits": [
+                "_setup.common",
+                "_setup.toolchain.default",
+                "_setup.config.tests"
+            ]
+        },
+        {
+            "name": "config.profile",
+            "displayName": "Configure profiling",
+            "binaryDir": "${sourceDir}/cmake-build/${hostSystemName}/profile",
+            "inherits": [
+                "_setup.common",
+                "_setup.toolchain.default",
+                "_setup.config.profile"
+            ]
         }
     ],
     "testPresets": [
@@ -201,12 +260,12 @@
             }
         },
         {
+            "name": "test.default",
+            "configurePreset": "config.tests",
+            "configuration": "debug",
             "inherits": [
                 "_test.common"
-            ],
-            "name": "tests",
-            "configurePreset": "configure-tests",
-            "configuration": "debug"
+            ]
         }
     ],
     "workflowPresets": [
@@ -214,11 +273,11 @@
             "name": "release-build",
             "steps": [
                 {
-                    "name": "release",
+                    "name": "config.default.release",
                     "type": "configure"
                 },
                 {
-                    "name": "release",
+                    "name": "build.default.release",
                     "type": "build"
                 }
             ]
@@ -227,15 +286,15 @@
             "name": "run-tests",
             "steps": [
                 {
-                    "name": "configure-tests",
+                    "name": "config.tests",
                     "type": "configure"
                 },
                 {
-                    "name": "build-tests",
+                    "name": "build.tests",
                     "type": "build"
                 },
                 {
-                    "name": "tests",
+                    "name": "test.default",
                     "type": "test"
                 }
             ]

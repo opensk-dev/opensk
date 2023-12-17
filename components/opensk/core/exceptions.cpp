@@ -20,7 +20,7 @@ FrameBadAccess::FrameBadAccess(const char* details) : BadAccess(std::format("Fra
 // Engine
 
 EngineInitializationFailure::EngineInitializationFailure(const char* message) : std::runtime_error(
-    std::format("Engine initialization failed with an error: {}", message)) {
+        std::format("Engine initialization failed with an error: {}", message)) {
 }
 
 FailedToInitializeRuntime::FailedToInitializeRuntime() : EngineInitializationFailure("Couldn't initialize runtime") {
@@ -32,11 +32,10 @@ FailedToInitializePhysics::FailedToInitializePhysics() : EngineInitializationFai
 // Runtime
 
 RuntimeInitializationFailure::RuntimeInitializationFailure(std::string const& message) : std::runtime_error(
-    std::format("Runtime initialization failed with an error: {}", message)) {
+        std::format("Runtime initialization failed with an error: {}", message)) {
 }
 
 UnsupportedHardwareConstraint::UnsupportedHardwareConstraint(const char* constraint) : RuntimeInitializationFailure(
-    std::format("Unsupported hardware constraint: {}", constraint)) {
+        std::format("Unsupported hardware constraint: {}", constraint)) {
 }
-
 }// namespace sk::exceptions

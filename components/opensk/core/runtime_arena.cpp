@@ -6,7 +6,7 @@
 namespace sk {
 
 RuntimeArena::Control::Control(std::function<void()> const& working_loop) : is_working(true),
-    working_thread(working_loop) {
+        working_thread(working_loop) {
 }
 
 bool RuntimeArena::Control::on_fire() const {
@@ -54,7 +54,7 @@ void RuntimeArena::start() {
     if (control.is_working.load()) {
         return;
     }
-    std::lock_guard lock(control.mtx);
+    auto lock = std::lock_guard<std::mutex>(control.mtx);
     control.is_working = true;
     control.working_thread.emplace([this]() {
         working_loop();
@@ -64,7 +64,7 @@ void RuntimeArena::start() {
 void RuntimeArena::stop() {
     auto& control = *control_ptr_;
     if (control.is_working.load()) {
-        std::unique_lock lock(control.mtx);
+        auto lock = std::unique_lock<std::mutex>(control.mtx);
         control.is_working = false;
         control.tasks_queue.push(nullptr);
         if (control.working_thread.has_value()) {
@@ -78,7 +78,7 @@ void RuntimeArena::capture() {
     auto& control = *control_ptr_;
     if (control.is_working.load()) {
         return;
-    };
+    }
     control.is_working = true;
     working_loop();
 }
@@ -91,5 +91,4 @@ void RuntimeArena::stop_in_future() {
         control.is_should_exit = true;
     }
 }
-
-}// namespace sk
+} // namespace sk

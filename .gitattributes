@@ -1,0 +1,6 @@
+* text eol=lf
+
+CMakeLists.txt text
+
+*.cpp text
+*.hpp text

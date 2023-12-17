@@ -37,5 +37,4 @@ Settings& Engine::get_settings() {
 Runtime& Engine::get_runtime() {
     return runtime_.value();
 }
-
 }// namespace sk

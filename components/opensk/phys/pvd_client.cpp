@@ -66,5 +66,4 @@ PvdClient::~PvdClient() {
 physx::PxPvd* PvdClient::get_pvd() const {
     return pvd_ptr_;
 }
-
-}// namespace sk::debug
+} // namespace sk::debug

@@ -52,7 +52,6 @@ class UnsupportedHardwareConstraint : public RuntimeInitializationFailure {
   public:
     explicit UnsupportedHardwareConstraint(const char* constraint);
 };
-
 } // namespace sk::exceptions
 
 #endif // SK_CORE_EXCEPTIONS_HPP_

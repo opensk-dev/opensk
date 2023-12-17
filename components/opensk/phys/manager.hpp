@@ -17,7 +17,6 @@ namespace physx {
 class PxFoundation;
 
 class PxPhysics;
-
 } // namespace physx
 
 namespace sk {
@@ -25,12 +24,15 @@ namespace sk {
 class PhysicsManager {
   public:
     explicit PhysicsManager(tbb::task_arena& task_arena);
+
     ~PhysicsManager();
 
     PhysicsManager(PhysicsManager const& other) = delete;
+
     PhysicsManager& operator=(PhysicsManager const& other) = delete;
 
     PhysicsManager(PhysicsManager&& other) noexcept;
+
     PhysicsManager& operator=(PhysicsManager&& other) noexcept;
 
   private:
@@ -41,7 +43,6 @@ class PhysicsManager {
     physx::PxPhysics* physics_ptr_ = nullptr;
     sk::debug::PvdClient pvd_client_{};
 };
-
 } // namespace sk
 
 #endif // SK_PHYSICS_MANAGER_HPP_

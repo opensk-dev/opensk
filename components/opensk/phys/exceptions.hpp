@@ -24,7 +24,6 @@ class PhysicsAbort : public std::runtime_error {
   public:
     explicit PhysicsAbort();
 };
-
 } // namespace sk::exceptions
 
 #endif // SK_PHYSICS_EXTENSIONS_HPP_

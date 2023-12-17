@@ -7,8 +7,8 @@ namespace sk {
 void PhysicsErrorCallback::reportError(physx::PxErrorCode::Enum code, const char* message, const char* file, int line) {
 
     using spdlog::level::level_enum;
-    level_enum log_level;
-    std::string level_string;
+    auto log_level = level_enum::debug;
+    std::string level_string = "";
 
     switch (code) {
     case physx::PxErrorCode::eNO_ERROR: {
@@ -56,7 +56,7 @@ void PhysicsErrorCallback::reportError(physx::PxErrorCode::Enum code, const char
         log_level = level_enum::warn;
         break;
     }
-    default: {
+    case physx::PxErrorCode::eMASK_ALL: {
         level_string = "unknown";
         log_level = level_enum::debug;
     }
@@ -68,5 +68,4 @@ void PhysicsErrorCallback::reportError(physx::PxErrorCode::Enum code, const char
         throw sk::exceptions::PhysicsAbort();
     }
 }
-
-}// namespace sk
+} // namespace sk

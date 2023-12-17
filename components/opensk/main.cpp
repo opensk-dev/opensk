@@ -7,12 +7,12 @@
 #include <spdlog/spdlog.h>
 #include <tracy/Tracy.hpp>
 
-void enable_debug_logging() {
+static void enable_debug_logging() {
     using sk::config::BuildOptionsEnum;
-    if (sk::config::is_enabled<BuildOptionsEnum::debug_output>()) {
+    if constexpr (sk::config::is_enabled<BuildOptionsEnum::debug_output>) {
         spdlog::set_level(spdlog::level::debug);
-        spdlog::debug("enable profiling: {}", sk::config::is_enabled<BuildOptionsEnum::profiling>());
-        spdlog::debug("enable physics debug: {}", sk::config::is_enabled<BuildOptionsEnum::physics_debug>());
+        spdlog::debug("enable profiling: {}", sk::config::is_enabled<BuildOptionsEnum::profiling>);
+        spdlog::debug("enable physics debug: {}", sk::config::is_enabled<BuildOptionsEnum::physics_debug>);
     }
 }
 

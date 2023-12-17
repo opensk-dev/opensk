@@ -14,18 +14,23 @@ class Frame {
 
   public:
     Frame() = default;
+
     virtual ~Frame() noexcept(false);
 
     Frame(Frame&& other) noexcept = default;
+
     Frame& operator=(Frame&& other) noexcept = default;
 
     virtual void initialize();
+
     virtual void finalize();
 
     virtual void on_enable();
+
     virtual void on_disable();
 
     [[nodiscard]] bool is_initialized() const;
+
     [[nodiscard]] bool is_enabled() const;
 
   protected:
@@ -42,15 +47,19 @@ class FrameHolder {
 
   public:
     FrameHolder() = default;
+
     ~FrameHolder();
 
     FrameHolder(FrameHolder const& other) = delete;
+
     FrameHolder& operator=(FrameHolder const& other) = delete;
 
     FrameHolder(FrameHolder&& other) noexcept;
+
     FrameHolder& operator=(FrameHolder&& other) noexcept;
 
     explicit FrameHolder(Frame* frame);
+
     FrameHolder& operator=(Frame* frame);
 
     Frame* get();
@@ -61,7 +70,6 @@ class FrameHolder {
   private:
     Frame* frame_ptr_ = nullptr;
 };
-
 } // namespace sk
 
 #endif // SK_CORE_FRAME_HPP_

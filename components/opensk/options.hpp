@@ -13,7 +13,6 @@ struct ConfigureOptions {
 };
 
 std::optional<ConfigureOptions> read_options(int argc, const char* argv[]) noexcept;
-
 } // namespace sk
 
 #endif // SK_READ_OPTIONS_HPP_

@@ -22,12 +22,12 @@ std::optional<sk::ConfigureOptions> sk::read_options(int argc, const char* argv[
     // setup options descriptions
     auto command_line_options_desc = po::options_description("Command line options");
     command_line_options_desc.add_options()("help,h", "display this help message")("version,v",
-        "display version string")("config", config_option_val, "Path to config file");
+            "display version string")("config", config_option_val, "Path to config file");
 
     auto configure_options_desc = po::options_description("Configuration");
     configure_options_desc.add_options()("data-path", po::value<path>(), "Path to data folder")("settings-path",
-        po::value<path>(), "Path to settings folder")("saves-path", po::value<path>(),
-        "Path to folder contained saves");
+            po::value<path>(), "Path to settings folder")("saves-path", po::value<path>(),
+            "Path to folder contained saves");
 
     auto allowed_options_desc = po::options_description("Allowed options");
     allowed_options_desc.add(command_line_options_desc).add(configure_options_desc);
@@ -94,7 +94,7 @@ std::optional<sk::ConfigureOptions> sk::read_options(int argc, const char* argv[
             try_get_option(configure_options.data_path, "data-path");
             try_get_option(configure_options.settings_path, "settings-path");
             try_get_option(configure_options.saves_path, "saves-path");
-        } catch (const std::exception& ex) {
+        } catch (const std::exception&) {
             return {};
         }
     }

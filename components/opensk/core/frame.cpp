@@ -111,5 +111,4 @@ void FrameHolder::set_engine_ptr(Engine* engine_ptr) {
 Frame* FrameHolder::get() {
     return frame_ptr_;
 }
-
-}// namespace sk
+} // namespace sk
