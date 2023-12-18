@@ -1,5 +1,5 @@
-#ifndef SK_PHYSICS_ERROR_CALLBACK_HPP_
-#define SK_PHYSICS_ERROR_CALLBACK_HPP_
+#ifndef SK_PHYSICS_ERROR_CALLBACK_HPP
+#define SK_PHYSICS_ERROR_CALLBACK_HPP
 
 #include <physx/foundation/PxErrorCallback.h>
 
@@ -21,6 +21,6 @@ class PhysicsErrorCallback : public physx::PxErrorCallback {
 
     void reportError(physx::PxErrorCode::Enum code, const char* message, const char* file, int line) override;
 };
-} // namespace sk
+}// namespace sk
 
-#endif // SK_PHYSICS_ERROR_CALLBACK_HPP_
+#endif// SK_PHYSICS_ERROR_CALLBACK_HPP

@@ -27,4 +27,4 @@ void MainMenuFrame::on_disable() {
     Frame::on_disable();
     spdlog::info("disable main menu");
 }
-} // namespace sk
+}// namespace sk

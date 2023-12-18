@@ -1,5 +1,5 @@
-#ifndef SK_CORE_FRAME_HPP_
-#define SK_CORE_FRAME_HPP_
+#ifndef SK_CORE_FRAME_HPP
+#define SK_CORE_FRAME_HPP
 
 #include <exception>
 
@@ -70,6 +70,6 @@ class FrameHolder {
   private:
     Frame* frame_ptr_ = nullptr;
 };
-} // namespace sk
+}// namespace sk
 
-#endif // SK_CORE_FRAME_HPP_
+#endif// SK_CORE_FRAME_HPP

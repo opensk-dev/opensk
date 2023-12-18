@@ -48,6 +48,6 @@ inline constexpr bool is_enabled<BuildOptionsEnum::physics_debug> = SK_OPTION_PH
 
 template<>
 inline constexpr bool is_enabled<BuildOptionsEnum::profiling> = SK_OPTION_PROFILING;
-} // namespace sk::config
+}// namespace sk::config
 
-#endif // SK_CONFIG_OPTIONS_HPP
+#endif// SK_CONFIG_OPTIONS_HPP

@@ -1,5 +1,5 @@
-#ifndef SK_PHYSICS_EXTENSIONS_HPP_
-#define SK_PHYSICS_EXTENSIONS_HPP_
+#ifndef SK_PHYSICS_EXTENSIONS_HPP
+#define SK_PHYSICS_EXTENSIONS_HPP
 
 #include <stdexcept>
 
@@ -24,6 +24,6 @@ class PhysicsAbort : public std::runtime_error {
   public:
     explicit PhysicsAbort();
 };
-} // namespace sk::exceptions
+}// namespace sk::exceptions
 
-#endif // SK_PHYSICS_EXTENSIONS_HPP_
+#endif// SK_PHYSICS_EXTENSIONS_HPP

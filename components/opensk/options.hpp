@@ -1,5 +1,5 @@
-#ifndef SK_READ_OPTIONS_HPP_
-#define SK_READ_OPTIONS_HPP_
+#ifndef SK_READ_OPTIONS_HPP
+#define SK_READ_OPTIONS_HPP
 
 #include <filesystem>
 #include <optional>
@@ -13,6 +13,6 @@ struct ConfigureOptions {
 };
 
 std::optional<ConfigureOptions> read_options(int argc, const char* argv[]) noexcept;
-} // namespace sk
+}// namespace sk
 
-#endif // SK_READ_OPTIONS_HPP_
+#endif// SK_READ_OPTIONS_HPP

@@ -1,5 +1,5 @@
-#ifndef SK_FRAMES_MAIN_MENU_FRAME_HPP_
-#define SK_FRAMES_MAIN_MENU_FRAME_HPP_
+#ifndef SK_FRAMES_MAIN_MENU_FRAME_HPP
+#define SK_FRAMES_MAIN_MENU_FRAME_HPP
 
 #include <core/frame.hpp>
 #include <frames/main_menu/hello_task.hpp>
@@ -31,6 +31,6 @@ class MainMenuFrame : public Frame {
   private:
     HelloTask hello_task_;
 };
-} // namespace sk
+}// namespace sk
 
-#endif // SK_FRAMES_MAIN_MENU_FRAME_HPP_
+#endif// SK_FRAMES_MAIN_MENU_FRAME_HPP

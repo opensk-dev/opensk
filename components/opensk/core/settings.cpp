@@ -6,8 +6,9 @@
 
 namespace sk {
 
-Settings::Settings(std::filesystem::path settings_folder_path) : settings_folder_path_(
-        std::move(settings_folder_path)) {
+Settings::Settings(std::filesystem::path settings_folder_path)
+    : settings_folder_path_(
+              std::move(settings_folder_path)) {
 }
 
 void Settings::load(std::filesystem::path const& file_name, std::string const& subtree_path) {
@@ -16,4 +17,4 @@ void Settings::load(std::filesystem::path const& file_name, std::string const& s
     boost::property_tree::read_ini(file_path.string(), subtree);
     settings_.add_child(subtree_path, subtree);
 }
-} // namespace sk
+}// namespace sk

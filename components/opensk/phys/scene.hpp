@@ -1,5 +1,5 @@
-#ifndef SK_PHYSICS_SCENE_HPP_
-#define SK_PHYSICS_SCENE_HPP_
+#ifndef SK_PHYSICS_SCENE_HPP
+#define SK_PHYSICS_SCENE_HPP
 
 namespace sk {
 
@@ -19,6 +19,6 @@ class PhysicsScene {
 
   private:
 };
-} // namespace sk
+}// namespace sk
 
-#endif // SK_PHYSICS_SCENE_HPP_
+#endif// SK_PHYSICS_SCENE_HPP

@@ -5,15 +5,15 @@
 #include "../common/TracySystem.hpp"
 
 #ifndef TracyFunction
-#  define TracyFunction __FUNCTION__
+#define TracyFunction __FUNCTION__
 #endif
 
 #ifndef TracyFile
-#  define TracyFile __FILE__
+#define TracyFile __FILE__
 #endif
 
 #ifndef TracyLine
-#  define TracyLine __LINE__
+#define TracyLine __LINE__
 #endif
 
 #ifndef TRACY_ENABLE
@@ -113,6 +113,6 @@
 #define TracyFiberEnter(x)
 #define TracyFiberLeave
 
-#endif // TRACY_ENABLE
+#endif// TRACY_ENABLE
 
-#endif // TRACY_HPP
+#endif// TRACY_HPP

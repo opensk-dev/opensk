@@ -14,7 +14,8 @@ namespace sk {
 namespace config {
 
 const char* version_string();
-} // namespace config
+
+}// namespace config
 
 // BOOST_PP_BOOL_true and BOOST_PP_BOOL_false provide true/false into BOOST_PP_BOOL
 // I suggested to add it into <boost/preprocessor/logical/bool.hpp>
@@ -35,7 +36,7 @@ const char* version_string();
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
 
-#endif // BOOST_COMP_CLANG
+#endif// BOOST_COMP_CLANG
 
 inline void throw_pedantic(std::exception const& ex) {
     using namespace sk::config;
@@ -48,10 +49,10 @@ inline void throw_pedantic(std::exception const& ex) {
 
 #pragma clang diagnostic pop
 
-#endif // BOOST_COMP_CLANG
+#endif// BOOST_COMP_CLANG
 
 // #undef SK_throw_pedantic_noreturn
 
-} // namespace sk
+}// namespace sk
 
-#endif // SK_CONFIG_HPP
+#endif// SK_CONFIG_HPP

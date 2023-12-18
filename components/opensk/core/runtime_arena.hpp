@@ -1,5 +1,5 @@
-#ifndef SK_CORE_RUNTIME_ARENA_HPP_
-#define SK_CORE_RUNTIME_ARENA_HPP_
+#ifndef SK_CORE_RUNTIME_ARENA_HPP
+#define SK_CORE_RUNTIME_ARENA_HPP
 
 #include <core/task.hpp>
 #include <tbb/concurrent_queue.h>
@@ -58,6 +58,6 @@ class RuntimeArena {
 
     std::unique_ptr<Control> control_ptr_{};
 };
-} // namespace sk
+}// namespace sk
 
-#endif // SK_CORE_RUNTIME_ARENA_HPP_
+#endif// SK_CORE_RUNTIME_ARENA_HPP

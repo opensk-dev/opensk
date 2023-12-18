@@ -1,5 +1,5 @@
-#ifndef SK_CORE_TASK_HPP_
-#define SK_CORE_TASK_HPP_
+#ifndef SK_CORE_TASK_HPP
+#define SK_CORE_TASK_HPP
 
 namespace sk {
 
@@ -22,6 +22,6 @@ class Task {
     virtual void abort() {
     }
 };
-} // namespace sk
+}// namespace sk
 
-#endif // SK_CORE_TASK_HPP_
+#endif// SK_CORE_TASK_HPP

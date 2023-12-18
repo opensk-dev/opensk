@@ -1,12 +1,12 @@
-#ifndef SK_PHYSICS_PVD_CLIENT_HPP_
-#define SK_PHYSICS_PVD_CLIENT_HPP_
+#ifndef SK_PHYSICS_PVD_CLIENT_HPP
+#define SK_PHYSICS_PVD_CLIENT_HPP
 
 namespace physx {
 
 class PxPvd;
 
 class PxFoundation;
-} // namespace physx
+}// namespace physx
 
 namespace sk::debug {
 
@@ -33,6 +33,6 @@ class PvdClient {
   private:
     physx::PxPvd* pvd_ptr_ = nullptr;
 };
-} // namespace sk::debug
+}// namespace sk::debug
 
-#endif // SK_PHYSICS_PVD_CLIENT_HPP_
+#endif// SK_PHYSICS_PVD_CLIENT_HPP

@@ -1,5 +1,5 @@
-#ifndef SK_CORE_ENGINE_HPP_
-#define SK_CORE_ENGINE_HPP_
+#ifndef SK_CORE_ENGINE_HPP
+#define SK_CORE_ENGINE_HPP
 
 #include <core/frame.hpp>
 #include <core/runtime.hpp>
@@ -42,6 +42,6 @@ class Engine {
     std::optional<Runtime> runtime_{};
     std::optional<PhysicsManager> physics_manager_{};
 };
-} // namespace sk
+}// namespace sk
 
-#endif // SK_CORE_ENGINE_HPP_
+#endif// SK_CORE_ENGINE_HPP

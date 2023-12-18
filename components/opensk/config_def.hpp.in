@@ -3,4 +3,4 @@
 
 #define SK_VERSION_STRING "${PROJECT_VERSION}"
 
-#endif // SK_CONFIG_DEF_HPP
+#endif// SK_CONFIG_DEF_HPP

@@ -1,5 +1,5 @@
-#ifndef SK_PHYSICS_CPU_DISPATCHER_HPP_
-#define SK_PHYSICS_CPU_DISPATCHER_HPP_
+#ifndef SK_PHYSICS_CPU_DISPATCHER_HPP
+#define SK_PHYSICS_CPU_DISPATCHER_HPP
 
 #include <physx/task/PxCpuDispatcher.h>
 
@@ -30,6 +30,6 @@ class PhysicsCpuDispatcher : public physx::PxCpuDispatcher {
   private:
     tbb::task_arena& task_arena_;
 };
-} // namespace sk
+}// namespace sk
 
-#endif // SK_PHYSICS_CPU_DISPATCHER_HPP_
+#endif// SK_PHYSICS_CPU_DISPATCHER_HPP

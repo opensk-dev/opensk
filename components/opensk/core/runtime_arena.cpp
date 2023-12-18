@@ -5,8 +5,9 @@
 
 namespace sk {
 
-RuntimeArena::Control::Control(std::function<void()> const& working_loop) : is_working(true),
-        working_thread(working_loop) {
+RuntimeArena::Control::Control(std::function<void()> const& working_loop)
+    : is_working(true),
+      working_thread(working_loop) {
 }
 
 bool RuntimeArena::Control::on_fire() const {
@@ -91,4 +92,4 @@ void RuntimeArena::stop_in_future() {
         control.is_should_exit = true;
     }
 }
-} // namespace sk
+}// namespace sk

@@ -6,4 +6,4 @@ namespace sk::config {
 const char* version_string() {
     return SK_VERSION_STRING;
 }
-} // namespace sk::config
+}// namespace sk::config

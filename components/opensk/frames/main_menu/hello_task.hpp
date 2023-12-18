@@ -1,5 +1,5 @@
-#ifndef SK_FRAMES_MAIN_MENU_HELLO_TASK_HPP_
-#define SK_FRAMES_MAIN_MENU_HELLO_TASK_HPP_
+#ifndef SK_FRAMES_MAIN_MENU_HELLO_TASK_HPP
+#define SK_FRAMES_MAIN_MENU_HELLO_TASK_HPP
 
 #include <core/task.hpp>
 
@@ -15,6 +15,6 @@ class HelloTask : public Task {
 
     void execute() override;
 };
-} // namespace sk
+}// namespace sk
 
-#endif // SK_FRAMES_MAIN_MENU_HELLO_TASK_HPP_
+#endif// SK_FRAMES_MAIN_MENU_HELLO_TASK_HPP

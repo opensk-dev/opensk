@@ -682,6 +682,6 @@ struct Color {
         Teal = 0x008080,
     };
 };
-}
+}// namespace tracy
 
 #endif

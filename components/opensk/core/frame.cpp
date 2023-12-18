@@ -68,7 +68,8 @@ bool Frame::is_enabled() const {
     return is_enabled_;
 }
 
-FrameHolder::FrameHolder(Frame* frame) : frame_ptr_(frame) {
+FrameHolder::FrameHolder(Frame* frame)
+    : frame_ptr_(frame) {
     if (frame != nullptr) {
         frame->on_enable();
     }
@@ -111,4 +112,4 @@ void FrameHolder::set_engine_ptr(Engine* engine_ptr) {
 Frame* FrameHolder::get() {
     return frame_ptr_;
 }
-} // namespace sk
+}// namespace sk

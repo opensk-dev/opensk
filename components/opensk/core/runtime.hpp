@@ -1,5 +1,5 @@
-#ifndef SK_CORE_RUNTIME_HPP_
-#define SK_CORE_RUNTIME_HPP_
+#ifndef SK_CORE_RUNTIME_HPP
+#define SK_CORE_RUNTIME_HPP
 
 #include <core/runtime_arena.hpp>
 
@@ -34,6 +34,6 @@ class Runtime {
   private:
     RuntimeArena main_arena_{RuntimeArena::Managed{}};
 };
-} // namespace sk
+}// namespace sk
 
-#endif // SK_CORE_RUNTIME_HPP_
+#endif// SK_CORE_RUNTIME_HPP
