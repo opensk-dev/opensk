@@ -29,9 +29,6 @@ jobs:
 
       - uses: lukka/run-vcpkg@v11
         with:
-          vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
-          vcpkgGitCommitId: 'c9f906558f9bb12ee9811d6edc98ec9255c6cda5'
-          runVcpkgInstall: true
           vcpkgJsonGlob: '**/vcpkg.json'
 
       - name: run tests
