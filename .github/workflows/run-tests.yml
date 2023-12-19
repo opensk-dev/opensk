@@ -16,17 +16,19 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
-          submodules: 'recursive'
+          submodules: true
+          # This is useful to avoid https://github.com/microsoft/vcpkg/issues/25349
+          # which is caused by missing Git history on the vcpkg submodule which ports
+          # try to access.
+          # Do not use if not needed, since it slows down the checkout of sources.
+          # fetch-depth: 0
 
       - uses: lukka/get-cmake@latest
 
       - uses: lukka/run-vcpkg@v11
         with:
-          vcpkgGitCommitId: '5b1214315250939257ef5d62ecdcbca18cf4fb1c'
-          runVcpkgInstall: true
-          doNotCache: false
           vcpkgJsonGlob: '**/vcpkg.json'
 
       - name: run tests
