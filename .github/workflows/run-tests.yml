@@ -34,4 +34,5 @@ jobs:
       - name: run tests
         uses: lukka/run-cmake@v10
         with:
+          cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
           workflowPreset: run-tests
