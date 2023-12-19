@@ -24,4 +24,4 @@ jobs:
 
       - name: lukka/run-cmake@v10
         with:
-          workflowPreset: 'run-tests'
+          workflowPreset: 'release-build'
