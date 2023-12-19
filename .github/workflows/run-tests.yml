@@ -24,7 +24,7 @@ jobs:
 
       - uses: lukka/run-vcpkg@v11
         with:
-          vcpkgGitCommitId: '9edb1b8e590cc086563301d735cae4b6e732d2d2'
+          vcpkgGitCommitId: '5b1214315250939257ef5d62ecdcbca18cf4fb1c'
           runVcpkgInstall: true
           doNotCache: false
           vcpkgJsonGlob: '**/vcpkg.json'
