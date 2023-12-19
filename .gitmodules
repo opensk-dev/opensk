@@ -4,6 +4,3 @@
 [submodule "components/tests"]
 	path = components/tests
 	url = https://github.com/opensk-dev/opensk-tests.git
-[submodule "vcpkg"]
-	path = vcpkg
-	url = https://github.com/microsoft/vcpkg.git

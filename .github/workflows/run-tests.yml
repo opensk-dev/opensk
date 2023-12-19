@@ -23,6 +23,11 @@ jobs:
       - uses: lukka/get-cmake@latest
 
       - uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgGitCommitId: '9edb1b8e590cc086563301d735cae4b6e732d2d2'
+          runVcpkgInstall: true
+          doNotCache: false
+          vcpkgJsonGlob: '**/vcpkg.json'
 
       - name: run tests
         uses: lukka/run-cmake@v10
