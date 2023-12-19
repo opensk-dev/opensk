@@ -22,6 +22,6 @@ jobs:
 
       - uses: lukka/get-cmake@latest
 
-      - name: lukka/run-cmake@v10
+      - uses: lukka/run-cmake@v10
         with:
           workflowPreset: 'run-tests'
