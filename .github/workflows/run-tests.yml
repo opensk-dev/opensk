@@ -1,0 +1,31 @@
+name: run tests
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+jobs:
+  run-tests:
+    strategy:
+      matrix:
+        os: [ windows-latest, ubuntu-latest, macos-latest ]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+
+      - name: get cmake
+        uses: lukka/get-cmake@latest
+
+      - name: get vcpkg
+        uses: lukka/run-vcpkg@v11
+
+      - name: run tests
+        uses: lukka/run-cmake@v10
+        with:
+          workflowPreset: run-tests
