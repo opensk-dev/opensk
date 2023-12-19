@@ -8,7 +8,8 @@
 
 namespace sk {
 
-Engine::Engine(ConfigureOptions const& options) : settings_(options.settings_path) {
+Engine::Engine(ConfigureOptions const& options)
+    : settings_(options.settings_path) {
     ZoneScopedNC("initialize engine", tracy::Color::Aqua);
     FrameHolder::set_engine_ptr(this);
     settings_.load("hardware.ini", "hardware");
@@ -37,5 +38,4 @@ Settings& Engine::get_settings() {
 Runtime& Engine::get_runtime() {
     return runtime_.value();
 }
-
 }// namespace sk

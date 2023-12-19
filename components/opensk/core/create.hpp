@@ -1,5 +1,5 @@
-#ifndef SK_CORE_CREATE_HPP_
-#define SK_CORE_CREATE_HPP_
+#ifndef SK_CORE_CREATE_HPP
+#define SK_CORE_CREATE_HPP
 
 #include <optional>
 #include <spdlog/spdlog.h>
@@ -7,7 +7,7 @@
 namespace sk {
 
 template<class T, class... Args>
-void create(std::optional<T>& t, Args&& ...args) {
+void create(std::optional<T>& t, Args&&... args) {
     try {
         t.emplace(std::forward<Args>(args)...);
     } catch (std::exception const& ex) {
@@ -16,12 +16,11 @@ void create(std::optional<T>& t, Args&& ...args) {
 }
 
 template<class T, class... Args>
-std::optional<T> create(Args&& ...args) {
+std::optional<T> create(Args&&... args) {
     std::optional<T> t{};
     sk::create(t, std::forward<Args>(args)...);
     return t;
 }
+}// namespace sk
 
-} // namespace sk
-
-#endif // SK_CORE_CREATE_HPP_
+#endif// SK_CORE_CREATE_HPP

@@ -1,5 +1,5 @@
-#ifndef SK_CORE_EXCEPTIONS_HPP_
-#define SK_CORE_EXCEPTIONS_HPP_
+#ifndef SK_CORE_EXCEPTIONS_HPP
+#define SK_CORE_EXCEPTIONS_HPP
 
 #include <stdexcept>
 
@@ -52,7 +52,6 @@ class UnsupportedHardwareConstraint : public RuntimeInitializationFailure {
   public:
     explicit UnsupportedHardwareConstraint(const char* constraint);
 };
+}// namespace sk::exceptions
 
-} // namespace sk::exceptions
-
-#endif // SK_CORE_EXCEPTIONS_HPP_
+#endif// SK_CORE_EXCEPTIONS_HPP

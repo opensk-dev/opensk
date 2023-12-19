@@ -34,7 +34,7 @@
   ],
   "configurePresets": [
     {
-      "hidden":true,
+      "hidden": true,
       "name": "_setup.common",
       "cacheVariables": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"

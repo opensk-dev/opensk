@@ -1,24 +1,27 @@
-#ifndef SK_CORE_TASK_HPP_
-#define SK_CORE_TASK_HPP_
+#ifndef SK_CORE_TASK_HPP
+#define SK_CORE_TASK_HPP
 
 namespace sk {
 
 class Task {
   public:
     Task() = default;
+
     virtual ~Task() = default;
 
     Task(Task const& other) = default;
+
     Task& operator=(Task const& other) = default;
 
     Task(Task&& other) noexcept = default;
+
     Task& operator=(Task&& other) noexcept = default;
 
     virtual void execute() = 0;
 
-    virtual void abort() {}
+    virtual void abort() {
+    }
 };
+}// namespace sk
 
-} // namespace sk
-
-#endif // SK_CORE_TASK_HPP_
+#endif// SK_CORE_TASK_HPP

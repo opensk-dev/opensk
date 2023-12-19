@@ -1,5 +1,5 @@
-#ifndef SK_PHYSICS_MANAGER_HPP_
-#define SK_PHYSICS_MANAGER_HPP_
+#ifndef SK_PHYSICS_MANAGER_HPP
+#define SK_PHYSICS_MANAGER_HPP
 
 #include <phys/cpu_dispatcher.hpp>
 #include <phys/error_callback.hpp>
@@ -17,20 +17,22 @@ namespace physx {
 class PxFoundation;
 
 class PxPhysics;
-
-} // namespace physx
+}// namespace physx
 
 namespace sk {
 
 class PhysicsManager {
   public:
     explicit PhysicsManager(tbb::task_arena& task_arena);
+
     ~PhysicsManager();
 
     PhysicsManager(PhysicsManager const& other) = delete;
+
     PhysicsManager& operator=(PhysicsManager const& other) = delete;
 
     PhysicsManager(PhysicsManager&& other) noexcept;
+
     PhysicsManager& operator=(PhysicsManager&& other) noexcept;
 
   private:
@@ -41,7 +43,6 @@ class PhysicsManager {
     physx::PxPhysics* physics_ptr_ = nullptr;
     sk::debug::PvdClient pvd_client_{};
 };
+}// namespace sk
 
-} // namespace sk
-
-#endif // SK_PHYSICS_MANAGER_HPP_
+#endif// SK_PHYSICS_MANAGER_HPP

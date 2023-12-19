@@ -16,10 +16,10 @@ Runtime::Runtime(std::uint32_t concurrency) {
 
 void Runtime::push_task(Runtime::ArenasEnum arena, Task* task) {
     switch (arena) {
-    case ArenasEnum::main: {
-        main_arena_.push_task(task);
-        break;
-    }
+        case ArenasEnum::main: {
+            main_arena_.push_task(task);
+            break;
+        }
     }
 }
 
@@ -30,5 +30,4 @@ void Runtime::abort() {
 RuntimeArena& Runtime::get_main_arena() {
     return main_arena_;
 }
-
-} // namespace sk
+}// namespace sk

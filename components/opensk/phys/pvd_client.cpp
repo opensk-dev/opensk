@@ -11,9 +11,9 @@ namespace sk::debug {
 
 #ifdef SK_ENABLE_PHYSX_PVD_CLIENT
 
-void PvdClient::initialize(physx::PxFoundation &foundation) {
+void PvdClient::initialize(physx::PxFoundation& foundation) {
     pvd_ptr_ = physx::PxCreatePvd(foundation);
-    physx::PxPvdTransport *transport = physx::PxDefaultPvdSocketTransportCreate("localhost", 5425, 10);
+    physx::PxPvdTransport* transport = physx::PxDefaultPvdSocketTransportCreate("localhost", 5425, 10);
     pvd_ptr_->connect(*transport, physx::PxPvdInstrumentationFlag::eALL);
     if (pvd_ptr_->isConnected()) {
         spdlog::debug("PVD connected");
@@ -22,18 +22,19 @@ void PvdClient::initialize(physx::PxFoundation &foundation) {
 
 void PvdClient::finalize() {
     if (pvd_ptr_) {
-        auto *transport = pvd_ptr_->getTransport();
+        auto* transport = pvd_ptr_->getTransport();
         pvd_ptr_->release();
         pvd_ptr_ = nullptr;
         transport->release();
     }
 }
 
-PvdClient::PvdClient(PvdClient &&other) noexcept : pvd_ptr_(other.pvd_ptr_) {
+PvdClient::PvdClient(PvdClient&& other) noexcept
+    : pvd_ptr_(other.pvd_ptr_) {
     other.pvd_ptr_ = nullptr;
 }
 
-PvdClient &PvdClient::operator=(PvdClient &&other) noexcept {
+PvdClient& PvdClient::operator=(PvdClient&& other) noexcept {
     if (this != &other) {
         pvd_ptr_ = other.pvd_ptr_;
         other.pvd_ptr_ = nullptr;
@@ -50,7 +51,8 @@ void PvdClient::initialize(physx::PxFoundation&) {
 void PvdClient::finalize() {
 }
 
-PvdClient::PvdClient(PvdClient&&) noexcept: pvd_ptr_() {
+PvdClient::PvdClient(PvdClient&&) noexcept
+    : pvd_ptr_() {
 }
 
 PvdClient& PvdClient::operator=(PvdClient&&) noexcept {
@@ -66,5 +68,4 @@ PvdClient::~PvdClient() {
 physx::PxPvd* PvdClient::get_pvd() const {
     return pvd_ptr_;
 }
-
-} // namespace sk::debug
+}// namespace sk::debug
